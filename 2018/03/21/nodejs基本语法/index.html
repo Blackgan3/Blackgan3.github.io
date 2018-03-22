@@ -3,19 +3,22 @@
 <head>
     <meta charset="utf-8">
     
-    <title>归档 | Blackgan</title>
+    <title>nodejs基本语法 | Blackgan</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
+        <meta name="keywords" content="" />
+    
     <meta name="description" content="只要这一秒不失望,下一秒就还有希望">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Blackgan">
-<meta property="og:url" content="http://github.com/blackgan3/archives/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nodejs基本语法">
+<meta property="og:url" content="http://github.com/blackgan3/2018/03/21/nodejs基本语法/index.html">
 <meta property="og:site_name" content="Blackgan">
 <meta property="og:description" content="只要这一秒不失望,下一秒就还有希望">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-21T13:08:30.191Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Blackgan">
+<meta name="twitter:title" content="nodejs基本语法">
 <meta name="twitter:description" content="只要这一秒不失望,下一秒就还有希望">
     
 
@@ -123,468 +126,117 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <i class="icon fa fa-archive"></i>归档
+    未分类
     </h1>
 </div>
                         <div class="main-body-content">
-                            
-
-    
-    
+                            <article id="post-nodejs基本语法" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
         
-        
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2018" class="archive-year"><i class="icon fa fa-calendar-o"></i>2018</a>
-            </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2018/03/21/nodejs基本语法/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://github.com/blackgan3/2018/03/21/nodejs基本语法/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            
-            </div>
-            <div class="date"><time datetime="2018-03-21T13:08:30.000Z" itemprop="datePublished">2018-03-21</time></div>
-        </div>
-        
+            <header class="article-header">
+                
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2018/03/21/nodejs基本语法/">nodejs基本语法</a>
+        nodejs基本语法
         </h1>
     
 
-        <p class="article-excerpt">
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/03/21/nodejs基本语法/" class="article-date">
+            <time datetime="2018-03-21T13:08:30.000Z" itemprop="datePublished">2018-03-21</time>
+        </a>
+    </div>
+
+                
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
             
-        </p>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://github.com/blackgan3/2018/03/21/nodejs基本语法/" data-id="cjf1zswao0007jwqxfgrt0c1l" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
     </div>
 </article>
-    
 
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2018/03/21/JavaScript闭包/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
+    <section id="comments">
     
         
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://github.com/blackgan3/2018/03/21/JavaScript闭包/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            
-            </div>
-            <div class="date"><time datetime="2018-03-21T13:08:13.000Z" itemprop="datePublished">2018-03-21</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2018/03/21/JavaScript闭包/">JavaScript闭包</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-        </p>
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </div>
-</article>
-    
-        </div>
-    
 
     
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2018/03/21/JavaScript中函数参数传递/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://github.com/blackgan3/2018/03/21/JavaScript中函数参数传递/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            
-            </div>
-            <div class="date"><time datetime="2018-03-21T13:08:01.000Z" itemprop="datePublished">2018-03-21</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2018/03/21/JavaScript中函数参数传递/">JavaScript中函数参数传递</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2018/03/21/JavaScript中的事件委托机制/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://github.com/blackgan3/2018/03/21/JavaScript中的事件委托机制/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            
-            </div>
-            <div class="date"><time datetime="2018-03-21T13:07:39.000Z" itemprop="datePublished">2018-03-21</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2018/03/21/JavaScript中的事件委托机制/">JavaScript中的事件委托机制</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2018/03/21/JavaScript中的this指向问题/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://github.com/blackgan3/2018/03/21/JavaScript中的this指向问题/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            
-            </div>
-            <div class="date"><time datetime="2018-03-21T13:07:09.000Z" itemprop="datePublished">2018-03-21</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2018/03/21/JavaScript中的this指向问题/">JavaScript中的this指向问题</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2018/03/21/从JavaScript的事件循环到Promise/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://github.com/blackgan3/2018/03/21/从JavaScript的事件循环到Promise/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            
-            </div>
-            <div class="date"><time datetime="2018-03-21T11:55:43.000Z" itemprop="datePublished">2018-03-21</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2018/03/21/从JavaScript的事件循环到Promise/">从JavaScript的事件循环到Promise</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            12371728391729
-
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2018/03/21/hello-world/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://github.com/blackgan3/2018/03/21/hello-world/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            
-            </div>
-            <div class="date"><time datetime="2018-03-21T11:44:28.781Z" itemprop="datePublished">2018-03-21</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2018/03/21/hello-world/">Hello World</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-        
-            </div></section>
-        
-        
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2016" class="archive-year"><i class="icon fa fa-calendar-o"></i>2016</a>
-            </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2016/06/10/Angularjs指令/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://github.com/blackgan3/2016/06/10/Angularjs指令/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            
-            </div>
-            <div class="date"><time datetime="2016-06-10T12:50:30.000Z" itemprop="datePublished">2016-06-10</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2016/06/10/Angularjs指令/">Angularjs指令</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            ng通过指令这个新属性来扩展html,angular通过内置的指令来为新应用添加功能,允许你自定义指令,ng-app初始化一个ng应用程序,ng-model将元素值绑定到应用程序.
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2016/05/10/ajax详解/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://e.hiphotos.baidu.com/image/pic/item/80cb39dbb6fd526684327508a718972bd4073694.jpg)" alt="ajax详解" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://github.com/blackgan3/2016/05/10/ajax详解/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            
-            </div>
-            <div class="date"><time datetime="2016-05-10T11:27:10.000Z" itemprop="datePublished">2016-05-10</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2016/05/10/ajax详解/">ajax详解</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            ajax详解
-ajax(Asynchronous Javascript AndXML)即为异步的JavaScript和XML,顾名思义,这个技术是和我们当前页面刷新无关的,因为它是异步的,在没有ajax的时候,我们如果去请求数据库中的数据就要将当前页面进行刷新,最常用的你可以想到我们的表单验证部分,以前都是填完了所有的表单去一次性验证,像这样的注册界面,你填错了就要刷新页面从头再来,所以,现在有了ajax你可以填一个表格就进行一次验证,而且页面并不会刷新.
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-
-    </div></section>
-
+    </section>
 
 
                         </div>
@@ -605,6 +257,19 @@ ajax(Asynchronous Javascript AndXML)即为异步的JavaScript和XML,顾名思义
             
         </ul>
     </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/03/21/JavaScript闭包/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">JavaScript闭包</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
     
     <div class="widgets-container">
         
@@ -798,11 +463,13 @@ ajax(Asynchronous Javascript AndXML)即为异步的JavaScript和XML,顾名思义
     var disqus_shortname = 'hexo-theme-hueman';
     
     
+    var disqus_url = 'http://github.com/blackgan3/2018/03/21/nodejs基本语法/';
+    
     (function() {
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
     </script>
