@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>ES6中的Generator函数 | Blackgan</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="" />
+    
+    <meta name="description" content="generator是什么？generator是ES6提供的一种异步编程解决方案，在语法上，可以把它理解为一个状态机，内部封装了多种状态。执行generator，会生成返回一个遍历器对象。返回的遍历器对象，可以依次遍历generator函数的每一个状态。同时ES6规定这个遍历器是Generator函数的实例，也继承了Genarator函数的prototype对象上的方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6中的Generator函数">
+<meta property="og:url" content="http://github.com/blackgan3/2018/02/23/ES6中的Generator函数/index.html">
+<meta property="og:site_name" content="Blackgan">
+<meta property="og:description" content="generator是什么？generator是ES6提供的一种异步编程解决方案，在语法上，可以把它理解为一个状态机，内部封装了多种状态。执行generator，会生成返回一个遍历器对象。返回的遍历器对象，可以依次遍历generator函数的每一个状态。同时ES6规定这个遍历器是Generator函数的实例，也继承了Genarator函数的prototype对象上的方法。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-23T07:45:42.439Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6中的Generator函数">
+<meta name="twitter:description" content="generator是什么？generator是ES6提供的一种异步编程解决方案，在语法上，可以把它理解为一个状态机，内部封装了多种状态。执行generator，会生成返回一个遍历器对象。返回的遍历器对象，可以依次遍历generator函数的每一个状态。同时ES6规定这个遍历器是Generator函数的实例，也继承了Genarator函数的prototype对象上的方法。">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                        
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    未分类
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-ES6中的Generator函数" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        ES6中的Generator函数
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/02/23/ES6中的Generator函数/" class="article-date">
+            <time datetime="2018-02-23T07:44:42.000Z" itemprop="datePublished">2018-02-23</time>
+        </a>
+    </div>
+
+                
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h4 id="generator是什么？"><a href="#generator是什么？" class="headerlink" title="generator是什么？"></a>generator是什么？</h4><p>generator是ES6提供的一种异步编程解决方案，在语法上，可以把它理解为一个状态机，内部封装了多种状态。执行generator，会生成返回一个遍历器对象。返回的遍历器对象，可以依次遍历generator函数的每一个状态。同时ES6规定这个遍历器是Generator函数的实例，也继承了Genarator函数的prototype对象上的方法。</p>
+<a id="more"></a>
+<p>最简单的generator函数,其实它就是一个普通的函数，但是它有两个特征。第一就是function关键字与函数名之间有一个*号，其二就是函数体内使用yield表达式来遍历状态：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">newGenerator</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">yield</span> <span class="string">'hello'</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="string">'world'</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'ending'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>执行generator函数之后，该函数并不会立即执行，返回的也不是函数运行结果，而是一个指向内部状态的指针对象。通常使用遍历器对象的next方法。使得指针移向下一个状态。每一次调用next()方法，内部指针就从函数头部或上一次停下里的地方开始执行，直到遇到下一个yield表达式位置，由此可以看出，generator是分段执行的，yield表达式是暂停执行的标记，而next方法可以恢复执行。</p>
+<h4 id="generator中的yield表达式"><a href="#generator中的yield表达式" class="headerlink" title="generator中的yield表达式"></a>generator中的yield表达式</h4><p>yield表达式在generator中是作为一个暂停标志，当碰到yield时，函数暂停执行，等到下一次next()执行时，函数才从当前yield位置开始执行。并且，yield表达式只能用在Generator函数里边；同时，yield如果后边带一个<em>,则就是相当于一个for…of的简写形式，如果yield后边不带</em>,则返回的是generator的值。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">gen</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">yield</span> <span class="string">'hello'</span>;</span><br><span class="line">    <span class="keyword">yield</span>* <span class="string">'hello'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> f = gen();</span><br><span class="line"><span class="built_in">console</span>.log(f.next().value);</span><br><span class="line"><span class="built_in">console</span>.log(f.next().value);</span><br><span class="line"><span class="built_in">console</span>.log(f.next().value);</span><br><span class="line"><span class="built_in">console</span>.log(f.next().value);</span><br><span class="line"><span class="built_in">console</span>.log(f.next().value);</span><br></pre></td></tr></table></figure></p>
+<p>上述例子中的后四个next()函数，就会顺序的返回h e l l</p>
+<h4 id="generator中的next函数"><a href="#generator中的next函数" class="headerlink" title="generator中的next函数"></a>generator中的next函数</h4><p>通过next函数，可以执行对应的yield表达式，且next()函数还可以带参数，该参数可以作为上一次yield表达式的返回值，因为yield本身是没有返回值的，如果next()中不带参数，则yield每次运行之后的返回值都是为undefined;<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">dataConsumer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Started'</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`1. <span class="subst">$&#123;<span class="keyword">yield</span>&#125;</span>`</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`2. <span class="subst">$&#123;<span class="keyword">yield</span>&#125;</span>`</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'result'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> genObj = dataConsumer();</span><br><span class="line">genObj.next();</span><br><span class="line"><span class="comment">// Started</span></span><br><span class="line">genObj.next(<span class="string">'a'</span>);</span><br><span class="line"><span class="comment">// 1. a</span></span><br><span class="line">genObj.next(<span class="string">'b'</span>);</span><br><span class="line"><span class="comment">// 2. b</span></span><br></pre></td></tr></table></figure></p>
+<p>上述函数中，第一次运行next()，运行到第一个next()函数截止，第二个next运行时，传入的参数为’a’;则运行到第二个yield地方截止，然后第一个yield运行的返回值为’a’,依次类推，则得到上述结果。</p>
+<p>另外，通过for…of可以循环generator中的所有状态，并且不需要使用next()函数。除了for…of循环以外，扩展运算符(…),解构赋值和Array.form方法内部调用的，都是遍历器接口。</p>
+<p>generator生成的对象，还有其他一些函数，比如throw()用来抛出错误，return()用来定义返回值并终止generator的状态。</p>
+<p>以上的三个方法在本质上其实是一样的，他们就是让generator恢复执行，并且使用不同的语句来替代yield语句。</p>
+<ul>
+<li>next()是将yield表达式替换成一个值</li>
+<li>throw()是将yield表达式替换成一个throw语句</li>
+<li>return()是将yield表达式替换成一个return语句</li>
+</ul>
+<h4 id="Generator与协程"><a href="#Generator与协程" class="headerlink" title="Generator与协程"></a>Generator与协程</h4><p>协程可以理解为“协作的线程”或者“协作的函数”。协程既可以是单线程实现，也可以用多线程实现，前者是一种特殊的子例程，后者是一种特殊的线程。</p>
+<p>协程有点像函数，又有点像线程，它的运行流程大致如下。</p>
+<ul>
+<li>第一步，协程A开始执行</li>
+<li>第二部，协程A执行到一半，进入暂停，执行权转移到协程B</li>
+<li>第三步，（过了一段时间）协程B交换执行权</li>
+<li>最后，协程A恢复执行</li>
+</ul>
+<p>协程适合用于多任务运行环境，它与普通的线程很相似，都有自己的执行上下文，可以分享全局量。他们的不同之处在于，同一时间可以有多个线程处于运行状态，但是运行的协程只能有一个，其他协程都是处于暂停状态。</p>
+<p>由于JavaScript是单线程，只能保持一个调用栈，引入协程之后，每一个任务可以保持自己的调用栈，这样就可以再抛出错误的时候找到原始的调用栈，不至于像异步操作的回调函数那样，一旦出错，原始的调用栈早就结束了。</p>
+<p>Generator 函数是 ES6 对协程的实现，但属于不完全实现。Generator函数被称为“半协程”（semi-coroutine），意思是只有 Generator 函数的调用者，才能将程序的执行权还给 Generator函数。如果是完全执行的协程，任何函数都可以让暂停的协程继续执行。</p>
+<p>如果将Generator函数当做协程，完全可以将多个需要互相协作的任务写成Generator函数，他们之间使用yield标识交换控制权。</p>
+<p>Generator 函数执行产生的上下文环境，一旦遇到yield命令，就会暂时退出堆栈，但是并不消失，里面的所有变量和对象会冻结在当前状态。等到对它执行next命令时，这个上下文环境又会重新加入调用栈，冻结的变量和对象恢复执行。</p>
+<h4 id="Generator函数的多种用途"><a href="#Generator函数的多种用途" class="headerlink" title="Generator函数的多种用途"></a>Generator函数的多种用途</h4><ul>
+<li>可以使异步操作来实现同步化表达</li>
+<li>控制流管理</li>
+<li>部署Iterator接口</li>
+<li>做为数据结构</li>
+</ul>
+<hr>
+<p>上述的介绍中，我们看到了generator是什么，下边我们看一下，目前中，我们使用最多的，generator函数的异步调用。</p>
+<p>异步编程对于单线程的JavaScript无疑是十分重要的（可以笼统的将异步定义为不连续的执行）。之前的文章中，我们也说过，JavaScript中对于异步的实现，就是回调函数。我们之前也有使用过promise去进行死亡回调的改良，promise来使回调嵌套的表现形式更好了些。其实呢generator函数也可以用来实现异步回调的嵌套。</p>
+<p>整个Generator函数就是一个封装的异步任务，或者说是异步任务的容器。异步操作需要暂停的地方，都用yield语句注明。除此之外，它还有两个特性，使它可以作为异步编程的完整解决方案：函数体内外的数据交换和错误处理机制。即为next方法还可以接收参数，向Generator函数体内输入数据。</p>
+<h4 id="Thunk函数"><a href="#Thunk函数" class="headerlink" title="Thunk函数"></a>Thunk函数</h4><p>Thunk函数是自动执行Generator函数的一种方法。</p>
+<p>对于以前的函数参数的求值计算，有两种计算方式，一种是传值调用，一种是传名调用。编辑器中的“传名调用”的实现，往往是将参数放到一个临时函数之中，再将这个临时函数传入函数体，这个临时函数就叫做Thunk函数。</p>
+<p>JavaScript中使用的是传值调用，它的Thunk函数含义有所不同。再JavaScript中，替换的不是表达式，而是多参数函数的休整。</p>
+<p>Thunk函数可以用于Generator函数的自动流程管理。即使Generator函数可以自动执行。</p>
+<h4 id="co模块"><a href="#co模块" class="headerlink" title="co模块"></a>co模块</h4><p>co模块用于Generator函数的自动执行。co函数返回一个Promise对象，因此可以用then方法添加回调函数。</p>
+<p>使用了Generator函数之后，我们可以将多个异步嵌套的代码改为同步写异步，大大的简化了我们的代码量，以及代码的美观。</p>
+<p>上边就是大概的ES中的Generator函数的介绍，我们可以使用Generator来实现 lazy evaluation，Iterator和实现异步调用同步的写法，但是其中我们面临的更多的还是generator的执行问题，下一篇我们来看一下generator是怎么实现async/await来控制异步。以及co模块的实现。</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://github.com/blackgan3/2018/02/23/ES6中的Generator函数/" data-id="cjf3ncr0400012sqxh8c6yrvm" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/blackgan3" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/03/21/从JavaScript的事件循环到Promise/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            从JavaScript的事件循环到Promise
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2016/09/02/nodejs基本语法/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">nodejs基本语法</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/23/nodejs环境配置安装/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/23/nodejs环境配置安装/" class="title">nodejs环境配置安装</a></p>
+                            <p class="item-date"><time datetime="2018-03-23T07:48:49.000Z" itemprop="datePublished">2018-03-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/21/hello-world/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/21/hello-world/" class="title">Hello World</a></p>
+                            <p class="item-date"><time datetime="2018-03-21T11:44:28.781Z" itemprop="datePublished">2018-03-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/21/从JavaScript的事件循环到Promise/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/21/从JavaScript的事件循环到Promise/" class="title">从JavaScript的事件循环到Promise</a></p>
+                            <p class="item-date"><time datetime="2018-03-21T11:40:08.000Z" itemprop="datePublished">2018-03-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/02/23/ES6中的Generator函数/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/02/23/ES6中的Generator函数/" class="title">ES6中的Generator函数</a></p>
+                            <p class="item-date"><time datetime="2018-02-23T07:44:42.000Z" itemprop="datePublished">2018-02-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/09/02/nodejs基本语法/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/09/02/nodejs基本语法/" class="title">nodejs基本语法</a></p>
+                            <p class="item-date"><time datetime="2016-09-02T06:36:41.000Z" itemprop="datePublished">2016-09-02</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">-javascript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/javascript/" style="font-size: 15px;">-javascript</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nodejs/" style="font-size: 15px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/事件/" style="font-size: 10px;">事件</a> <a href="/tags/闭包/" style="font-size: 10px;">闭包</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 Blackgan</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://github.com/blackgan3/2018/02/23/ES6中的Generator函数/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>nodejs环境配置安装 | Blackgan</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="" />
+    
+    <meta name="description" content="title: nodejs环境配置安装(nvm)date: 2016-8-20 20:18:39tags:  - nodejs - javascript   在我们前端开发工程中,很多繁琐机械的操作都是会慢慢的被抽离出来的,当我们为dom操作和浏览器兼容性感到厌烦时,jQuery出现了,当我们不想再去理会dom的添加删除等的时候,angularJS来解救我们,那么,随着时间的发展,我们前端开发的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nodejs环境配置安装">
+<meta property="og:url" content="http://github.com/blackgan3/2018/03/23/nodejs环境配置安装/index.html">
+<meta property="og:site_name" content="Blackgan">
+<meta property="og:description" content="title: nodejs环境配置安装(nvm)date: 2016-8-20 20:18:39tags:  - nodejs - javascript   在我们前端开发工程中,很多繁琐机械的操作都是会慢慢的被抽离出来的,当我们为dom操作和浏览器兼容性感到厌烦时,jQuery出现了,当我们不想再去理会dom的添加删除等的时候,angularJS来解救我们,那么,随着时间的发展,我们前端开发的">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-23T07:51:12.824Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nodejs环境配置安装">
+<meta name="twitter:description" content="title: nodejs环境配置安装(nvm)date: 2016-8-20 20:18:39tags:  - nodejs - javascript   在我们前端开发工程中,很多繁琐机械的操作都是会慢慢的被抽离出来的,当我们为dom操作和浏览器兼容性感到厌烦时,jQuery出现了,当我们不想再去理会dom的添加删除等的时候,angularJS来解救我们,那么,随着时间的发展,我们前端开发的">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                        
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    未分类
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-nodejs环境配置安装" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        nodejs环境配置安装
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/03/23/nodejs环境配置安装/" class="article-date">
+            <time datetime="2018-03-23T07:48:49.000Z" itemprop="datePublished">2018-03-23</time>
+        </a>
+    </div>
+
+                
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <hr>
+<p>title: nodejs环境配置安装(nvm)<br>date: 2016-8-20 20:18:39<br>tags: </p>
+<pre><code>- nodejs
+- javascript
+</code></pre><hr>
+
+<p>在我们前端开发工程中,很多繁琐机械的操作都是会慢慢的被抽离出来的,当我们为dom操作和浏览器兼容性感到厌烦时,jQuery出现了,当我们不想再去理会dom的添加删除等的时候,angularJS来解救我们,那么,随着时间的发展,我们前端开发的王牌语言JavaScript,现在被应用到了服务器中,对的,这是一个里程碑式的创新,今后,你不再需要去使用php/.net等后端语言,仅仅使用JavaScript就可以前端后端通吃,这就是web全栈工程师吧!神奇的node.js为我们JavaScript提供了在后端运行<br><a id="more"></a><br>的环境,而它的包管理器npm(node package manage)现在也成为了全球最大的开源库生态系统.我们有很多很多的工具都是依赖于node环境进行使用的,所以我们使用node的第一步,就是配置node.js环境.</p>
+<p>那么配置node.js环境,当然,我们可以直接从官网下载,然后安装到电脑上就行了,当然,这是正确的,但是如果有一天我们需要使用新版本的node.js,或者使用旧版本的node.js时,我们还是需要去官网下载,然后安装,因为node.js的官方对于node.js的版本更新较慢,以至于一些大神等得不耐烦了,便开始自己更新node.js(当然node.js是开源的),你这一更新,导致官方团队坐不住了,那最后的结果就是官方的是稳定版本,当有新功能会在这个版本较高的发布,所以这就是经常会看到</p>
+
+<p>那么我们的解决方法就是安装一个nvm(node version manage)node版本管理控制器,通过 nvm我们可以随意的下载任意版本的node,可以随意切换使用各个版本的node,使用nvm之前,我们先来看一下,我们使用终端打开应用程序的实例:我们使用终端开启一个软件是,必须要cd到这个程序当前所在的文件目录下,<br></p>
+<p>我们可以看到,当前的FlashFXP的链接存在于桌面的上,当我们在桌面中的node.js文件夹中去试图打开它是打不开的,因为我们终端在当前文件夹中找不到FlashFXP的启动程序,所以会报错,那么我们有没有办法去改变这一现象,可以在任何地方,任何文件中启动真个程序呢?当然是可以的,我们只需要配置一下环境变量就可以了,右键我的电脑-&gt;选择属性-&gt;高级系统设置-&gt;环境变量,到了环境变量这,就找对地方了<br>
+　　</p>
+<p>环境变量是系统中一个特定的对象,当要求系统运行一个程序而且没有告诉系统这个程序的完整路径的时候,系统除了在当前的文件夹下边寻找之外,还会去环境变量中path中指定的路径去寻找,也就是说,如果你将一个文件夹的指定路径保存到了path中,那么每次在终端启动程序时,你根本就不必进去这个程序所在的文件夹也能启动它了,这里我们会看到有系统变量和用户变量,顾名思义,用户变量就是当前登录用户下配置的各种变量,当我们切换用户的时候,这部分的变量是可以变化的,那么这时候我们就需要将想要添加的文件夹添加到用户变量中就行了,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FLASH= &quot;C:\Program Files (x86)\//将当前地址复制到一个变量中,</span><br><span class="line">path = %FLASH%;//将这个变量赋值到path中,这时候在任何地方我们都可以打开这个程序了</span><br></pre></td></tr></table></figure>
+<p>好了有了上边的铺垫之后,我们就可以来安装nvm了,我们可以使用git直接下载,当然也可以直接去github下载,这里提供一个下载地址,使用手动下载:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/coreybutler/nvm-windows/releases</span><br></pre></td></tr></table></figure></p>
+
+<p>下载图标中的nvm就行,下载完成后解压,然后安装nvm,安装目录地址注意不要有中文,不然指不定会出现什么错误,我这里直接将它安装在了D:\dev下边,安装完成后一般会去自动给我们配置好系统变量,如果没有,我们需要手动去配置系统变量,原理及方法和我们一开始所讲的一样:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NVM_HOME ：指向nvm安装目录</span><br><span class="line">NVM_SYMLINK：nodejs安装目录</span><br><span class="line">Path ：变量值中增加 NVM_HOME 和 NVM_SYMLINK两个环境变量</span><br></pre></td></tr></table></figure></p>
+<p>这时我们可以在终端中测试一下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$ nvm -v</span><br><span class="line"></span><br><span class="line">Running version 1.1.0.</span><br><span class="line"></span><br><span class="line">Usage:</span><br><span class="line"></span><br><span class="line">nvm arch : Show if node is running in 32 or 64 bit mode.</span><br><span class="line">nvm install &lt;version&gt; [arch] : The version can be a node.js version or &quot;latest&quot; for the latest stable version.</span><br><span class="line">Optionally specify whether to install the 32 or 64 bit version (defaults to system arch).</span><br><span class="line">Set [arch] to &quot;all&quot; to install 32 AND 64 bit versions.</span><br><span class="line">nvm list [available] : List the node.js installations. Type &quot;available&quot; at the end to see what can be installed. Aliased as ls.</span><br><span class="line">nvm on : Enable node.js version management.</span><br><span class="line">nvm off : Disable node.js version management.</span><br><span class="line">nvm proxy [url] : Set a proxy to use for downloads. Leave [url] blank to see the current proxy.</span><br><span class="line">Set [url] to &quot;none&quot; to remove the proxy.</span><br><span class="line">nvm uninstall &lt;version&gt; : The version must be a specific version.</span><br><span class="line">nvm use [version] [arch] : Switch to use the specified version. Optionally specify 32/64bit architecture.</span><br><span class="line">nvm use &lt;arch&gt; will continue using the selected version, but switch to 32/64 bit mode.</span><br><span class="line">nvm root [path] : Set the directory where nvm should store different versions of node.js.</span><br><span class="line">If &lt;path&gt; is not set, the current root will be displayed.</span><br><span class="line">nvm version : Displays the current running version of nvm for Windows. Aliased as v.</span><br><span class="line"></span><br><span class="line"> //这时就表示nvm安装成功了</span><br></pre></td></tr></table></figure></p>
+<p>这时候我们就可以安装node了,在终端输入命令：nvm ls-remote,用来查看远端的node版本,当然，你可能看不到结果，此时，你就需要输入另一个命令：export NVM_NODEJS_ORG_MIRROR=http:nodejs.org/dist,然后再输入nvm ls -remote,如果还不行,那就去下边这个地址去查看:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http</span><br><span class="line"></span><br><span class="line">s://github.com/coreybutler/nodedistro/blob/master/nodeversions.json</span><br></pre></td></tr></table></figure></p>
+<h2 id="这时候使用命令nvm-install-node版本号"><a href="#这时候使用命令nvm-install-node版本号" class="headerlink" title="这时候使用命令nvm install [node版本号]"></a>这时候使用命令nvm install [node版本号]</h2><p>等到进度条走完,输入命令 nvm list 来查看当前安装的node<br></p>
+<p>可以看到当前安装的有4.3.1版本,那么我么使用 nvm use 4.3.1就可以指定当前使用的node版本为4.3.1,4.3.2后边也会出现(当前使用的标志),当然,我们可以再去下载一个node版本,例如:<br></p>
+<p>等到进度条走完,这是我们就有了5.7.0和4.3.1两个版本了:这时我们可定是想要去在两个版本之间自如的去切换的,这是我们还需要配置一个文件,就是nvm 中的setting文件:</p>
+
+<p>　　打开文件进行配置</p>
+<p>　　如上,根据自己的文件目录进行配置,root表示的是当前nvm中内容的地址,path则是需要写入环境变量中的地址path中,会在当天dev/ 文件下生成一个nodejs快捷方式,来作为指向当前使用的node版本的快捷方式,如图所示,</p>
+<p>　　当我们配置好了之后,就可以进行node版本的切换了:</p>
+<p>　　</p>
+<p>　　这是我们会发现dev文件中生成了一个nodejs的快捷方式,点击这个快捷方式,就可以调转到当前使用版本的nodejs中,当然,安装好了nodejs之后,node还有一个npm(node package manage),这个工具,在新版本的node中已经集成了进来,所以我们可以直接使用了,通过npm我们不仅可以下载node的各种包,我们还可以下载各种在npm生态网上的包,例如jQuery,angularJS,bootstrap,等等很多包,还包括gulp,bower,grunt等等工具,这个我们下节再去讨论,本文 如有错误,还请指正,谢谢!</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://github.com/blackgan3/2018/03/23/nodejs环境配置安装/" data-id="cjf3ncr1g000f2sqxa5qfjqgz" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/blackgan3" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/03/21/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">Hello World</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/23/nodejs环境配置安装/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/23/nodejs环境配置安装/" class="title">nodejs环境配置安装</a></p>
+                            <p class="item-date"><time datetime="2018-03-23T07:48:49.000Z" itemprop="datePublished">2018-03-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/21/hello-world/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/21/hello-world/" class="title">Hello World</a></p>
+                            <p class="item-date"><time datetime="2018-03-21T11:44:28.781Z" itemprop="datePublished">2018-03-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/21/从JavaScript的事件循环到Promise/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/21/从JavaScript的事件循环到Promise/" class="title">从JavaScript的事件循环到Promise</a></p>
+                            <p class="item-date"><time datetime="2018-03-21T11:40:08.000Z" itemprop="datePublished">2018-03-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/02/23/ES6中的Generator函数/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/02/23/ES6中的Generator函数/" class="title">ES6中的Generator函数</a></p>
+                            <p class="item-date"><time datetime="2018-02-23T07:44:42.000Z" itemprop="datePublished">2018-02-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/09/02/nodejs基本语法/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/09/02/nodejs基本语法/" class="title">nodejs基本语法</a></p>
+                            <p class="item-date"><time datetime="2016-09-02T06:36:41.000Z" itemprop="datePublished">2016-09-02</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">-javascript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/javascript/" style="font-size: 15px;">-javascript</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nodejs/" style="font-size: 15px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/事件/" style="font-size: 10px;">事件</a> <a href="/tags/闭包/" style="font-size: 10px;">闭包</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 Blackgan</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://github.com/blackgan3/2018/03/23/nodejs环境配置安装/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

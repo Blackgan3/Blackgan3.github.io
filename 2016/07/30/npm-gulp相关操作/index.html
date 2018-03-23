@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>npm+gulp相关操作 | Blackgan</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="npm,gulp" />
+    
+    <meta name="description" content="在工作流相关的第一篇博客中,我们安装了nodejs的环境,那么nodejs自带的npm是一个功能十分强大的管理器,它已经不仅仅是局限于nodejs的版本管理器了,">
+<meta name="keywords" content="npm,gulp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="npm+gulp相关操作">
+<meta property="og:url" content="http://github.com/blackgan3/2016/07/30/npm-gulp相关操作/index.html">
+<meta property="og:site_name" content="Blackgan">
+<meta property="og:description" content="在工作流相关的第一篇博客中,我们安装了nodejs的环境,那么nodejs自带的npm是一个功能十分强大的管理器,它已经不仅仅是局限于nodejs的版本管理器了,">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-23T07:51:12.737Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="npm+gulp相关操作">
+<meta name="twitter:description" content="在工作流相关的第一篇博客中,我们安装了nodejs的环境,那么nodejs自带的npm是一个功能十分强大的管理器,它已经不仅仅是局限于nodejs的版本管理器了,">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                        
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    未分类
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-npm-gulp相关操作" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        npm+gulp相关操作
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2016/07/30/npm-gulp相关操作/" class="article-date">
+            <time datetime="2016-07-30T13:02:32.000Z" itemprop="datePublished">2016-07-30</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/gulp/">gulp</a>, <a class="tag-link" href="/tags/npm/">npm</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>　　在工作流相关的第一篇博客中,我们安装了nodejs的环境,那么nodejs自带的npm是一个功能十分强大的管理器,它已经不仅仅是局限于nodejs的版本管理器了,<a id="more"></a>那么当现在我们可以通过npm来下载我们需要使用的各种包,我们需要知道的是,nodejs是一个模块化的用法,它的各个功能都封装成一个一个的模块部分,关于模块的详细部分在nodejs部分再去详细介绍.那么既然它是由模块组成的,那么我们有时候就需要给我们本地的项目区添加各个模块,添加完成之后,我们自己在本地用着很爽,那当项目发布的时候,或者我们给被人传我们的代码的时候,我们还需要将项目依赖的各个模块一块打包传递过去,这是很繁琐费流量的一件事,所以我们可以在本地创建一个文件,文件中记录我们项目的信息,包括这个项目依赖的各个模块,那么别人拿到我们的的代码的时候,就可以根据我们这个文件去下载模块了,这时我们就需要用到一个文件package.json</p>
+<p>　　具体的生成方式也很简单,在你想要使用npm的文件夹下打开终端,输入命令npm init,这时就会让你初始化这个package.json文件了,</p>
+<p>　　</p>
+<p>　　生成这个文件后我们就可以使用npm指令进行模块的下载了,这里我们可以看到package.json中,有文件名,版本号,项目描述,项目主文件,全局依赖,项目依赖模块,脚本scripts等组成部分,其中,我们现在需要明白的一个地方是其中的dependencies和devDevpendenies区别,前者是你生产环境需要依赖的库,后者是你开发时候用的库,比如测试库,测试服务器之类的,在真实生产环境是不需要的,如果我们使用了构架工具,例如gulp之类的,打包的时候,是不会将dev库打包进去的.那么我们有了npm,就要来看一下它的基本使用命令吧,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">1,npm install &lt;moduleNames&gt;:安装Node模块,</span><br><span class="line">例如:  npm install gulp,</span><br><span class="line">         npm install -g gulp</span><br><span class="line">//第二种为全局安装,第一种为本地安装,区别在于全局安装会将模块安装到Node的安装目录下,而本地安装时安装到当前文件夹目录下</span><br><span class="line"></span><br><span class="line">2,npm uninstall &lt;moduleName&gt;:对应的卸载模块</span><br><span class="line"></span><br><span class="line">3,npm view &lt;moduleName&gt;:查看模块的package.json文件</span><br><span class="line"></span><br><span class="line">4,npm list :查看当前目录下已安装的node包,</span><br><span class="line"></span><br><span class="line">5,npm help:查看帮助命令</span><br><span class="line"></span><br><span class="line">6,npm  view moduleName dependencies:查看包的依赖关系</span><br><span class="line"></span><br><span class="line">7,npm view moduleName repository.url: 查看包的源文件地址</span><br><span class="line"></span><br><span class="line">8,npm help folders:查看npm使用的所有文件夹</span><br><span class="line"></span><br><span class="line">9,npm rebuild moduleName: 用于更改包内容后进行重建</span><br><span class="line"></span><br><span class="line">10,npm outdated:检查包是否已将过时,</span><br><span class="line"></span><br><span class="line">11,npm update &lt;moduleName&gt; 用于更新node模块</span><br><span class="line"></span><br><span class="line">12,npm search packageName :在发布一个npm包的时候,可以检查包名是否已经存在,</span><br><span class="line"></span><br><span class="line">13,npm -v :查看当前npm的版本号</span><br><span class="line"></span><br><span class="line">14,npm root :查看当前包的安装路径</span><br></pre></td></tr></table></figure></p>
+<p>　　那么接下来当我们的项目需要用到模块或者包的时候,我们就可以npm install它,这比你去手动的去官网下载方便了好多,当你创建好一个项目的时候,我们需要对要发布的这样项目进行好测试,打包,压缩混淆等等一系列步骤,而这些步骤正是繁琐无意义的,所以伟大的程序员就会去找工具来代替他,这就像人类发明其他工具是一个道理的,当我们厌倦了用手吃食物的时候,我们就发明了筷子和刀叉(印度除外).</p>
+<p>　　目前比较流行的工具有grunt,gulp,yeoman等工具,其中gulp的核心设计时基于unix流的概念,利用nodejs的强大的流,不需要写中间文件,可以更快的完成构建,让简单的事情继续简单,复杂的任务变得可管理,而且它简单易学,它的核心API只有5个,掌握了5个API就学会了gulp,之后可以通过管道流去组件自己的任务.我们就以gulp为示例来进行一个项目的压缩管理.</p>
+<p>　　首先,我们需要通过npm下载gulp,在当前项目的文件夹下打开终端输入命令npm install –save-dev gulp,下载完成后,我们可以在package.json中查看到dev依赖,在node_modules中也可以查看到.这时我们已经安装好了gulp,我们还需要再当前项目的根目录下新建一个gulpfile.js文件来进行gulp的各种任务的书写,至于为什么这么写,官方规定!</p>
+<p>　　首先来个示例使用一下gulp,在gulpfile.js文件中写入以下内容:</p>
+<p>　　<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var gulp1 = require(&apos;gulp&apos;);</span><br><span class="line">gulp1.task(&apos;default&apos;,function()&#123;</span><br><span class="line">     console.log(&quot;默认任务执行&quot;)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//在终端中输入 gulp ,这时边执行了gulp的默认任务default,输出文字</span><br></pre></td></tr></table></figure></p>
+<p>　　这时我们可以看到,我们使用的require导入了gulp模块,这时commonJS格式的,在nodejs的时候会进行详解,我们现在要知道require后,gulp1就是gulp模块了.这时我们已经使用了gulp的一个API了,对,就是task,它的作用是定义一个任务.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gulp.task(任务名字,任务列表,任务动作()&#123;</span><br><span class="line">    //这里是任务将要执行的动作</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>//其中任务名字,和任务动作是必须的,而任务列表是非必须的,这是一个包含任务的数组,在当前任务完成后依次执行数组中的任务.<br>　　当我们有任务的时候,我们需要去给这个任务确定执行目标,这时候就引出了我们的另一个API,gulp.src();<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gulp.src(&apos;src/js/*.js&apos;)</span><br><span class="line">    .pipe(零件1)//零件就是值要对当前文件执行的操作,例如压缩,</span><br><span class="line">    .pipe(零件2)</span><br><span class="line">    .pipe(零件3);</span><br><span class="line"></span><br><span class="line">//我们之前就说过,gulp是基于nodejs强大的流的,我们通过src找到文件夹js下的所有js类型的文件,</span><br><span class="line">//然后这些js文件就像进入了一个流水线一样,</span><br><span class="line">//通过第一个管道来到第一个函数装配第一个零件,然后再通过管道流向了其他配件处,直到整个工程完毕.</span><br></pre></td></tr></table></figure></p>
+<p>　　我们现在可以创建一个任务,然后匹配到所有的js文件,对他们进行一系列操作,那么操作完成的文件呢?比如我们将所有的js文件进行了压缩,混淆,那这一部分文件放在哪去呢?当然不能够将原文件变成压缩后的文件了,这时候,我们需要将这些文件流向指定的文件夹.gulp中为我们提供了一个API,gulp.dest():<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">gulp.task(&apos;jsminTask&apos;,function()&#123;</span><br><span class="line">    gulp.src(&apos;src/js/*.js&apos;).</span><br><span class="line"></span><br><span class="line">    pipe(gulp.dest(&apos;dist/js/&apos;));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//在这个任务中,当动作执行到即将完毕的时候,</span><br><span class="line">//会将当前管道中的文件流向dest()中的文件夹下,</span><br><span class="line">//如果dest()中的文件夹不存在会自动创建</span><br></pre></td></tr></table></figure></p>
+<p>　　现在我们基本上已经可以来创建一个成形的任务了,但是,因为gulp中的api很少,而它的大部分API都是需要下载,当然我们可以使用npm下载,这里我们示例中就对于这个文件进行压缩,混淆,打包这三个步骤,它所依赖的包分别是jsmin,uglify,concat.我们可以去npm的官网,npmjs.com中去查找我们需要的包,而且我们也不需要去死记硬背各个包的作用,因为它的包实在是太多了,多到你记不完,我么只需要记住几个常用的包,当使用的时候可以进行查找,每个包的介绍都有用法实例,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">gulp.task(&apos;jsminTask&apos;,function()&#123;</span><br><span class="line">    gulp.src(&apos;src/js/*.js&apos;).</span><br><span class="line">    pipe(concat(&apos;all.js&apos;)). //打包成一个文件</span><br><span class="line">    pipe(jsmin()).//进行压缩</span><br><span class="line">    pipe(uglify()).//进行混淆</span><br><span class="line">    pipe(gulp.dest(&apos;dist/js/&apos;));//流向指定的文件夹下</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>//在终端输入gulp jaminTask就会执行当前任务了,执行完任务可以去dist/js下查看是否有all.js文件夹<br>//我们对css的打包压缩等操作可以去在设置一个cssminTask任务,HTML压缩同理<br>　　我们已经算是成功的对一个项目进行了发布前的工具发操作,但是我们还发现一个问题,那就是,当我们改动了项目中的文件内容后,我们还需要手动去再执行一次任务,这显然是很不智能的,所以便有了gulp.watch这个api,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gulp.watch(&apos;src/js/*.js&apos;,[&apos;jsminTask&apos;]);</span><br><span class="line">//这个API的作用是监听js文件,当js文件发生改变的时候,就执行jsminTask任务.</span><br></pre></td></tr></table></figure></p>
+<p>　　好了,讲到这里,我们的文件操作已经完成了,今天的分享就到这里,本文若有错误或不足,还请指正补充,谢谢!</p>
+<p>　　</p>
+<p>　　</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://github.com/blackgan3/2016/07/30/npm-gulp相关操作/" data-id="cjf3ncr1j000h2sqx94us2g2x" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/blackgan3" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2016/08/27/初识nodejs/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            初识nodejs
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2016/06/30/php-mysql基础操作/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">php+mysql基础操作</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/23/nodejs环境配置安装/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/23/nodejs环境配置安装/" class="title">nodejs环境配置安装</a></p>
+                            <p class="item-date"><time datetime="2018-03-23T07:48:49.000Z" itemprop="datePublished">2018-03-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/21/hello-world/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/21/hello-world/" class="title">Hello World</a></p>
+                            <p class="item-date"><time datetime="2018-03-21T11:44:28.781Z" itemprop="datePublished">2018-03-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/21/从JavaScript的事件循环到Promise/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/21/从JavaScript的事件循环到Promise/" class="title">从JavaScript的事件循环到Promise</a></p>
+                            <p class="item-date"><time datetime="2018-03-21T11:40:08.000Z" itemprop="datePublished">2018-03-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/02/23/ES6中的Generator函数/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/02/23/ES6中的Generator函数/" class="title">ES6中的Generator函数</a></p>
+                            <p class="item-date"><time datetime="2018-02-23T07:44:42.000Z" itemprop="datePublished">2018-02-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/09/02/nodejs基本语法/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/09/02/nodejs基本语法/" class="title">nodejs基本语法</a></p>
+                            <p class="item-date"><time datetime="2016-09-02T06:36:41.000Z" itemprop="datePublished">2016-09-02</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">-javascript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/javascript/" style="font-size: 15px;">-javascript</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nodejs/" style="font-size: 15px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/事件/" style="font-size: 10px;">事件</a> <a href="/tags/闭包/" style="font-size: 10px;">闭包</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 Blackgan</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://github.com/blackgan3/2016/07/30/npm-gulp相关操作/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>javascript中的this指向问题 | Blackgan</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="-javascript" />
+    
+    <meta name="description" content="在深入学习JavaScript之后,我们越来越多的会遇到函数或者在对象内部中,对于this的指向问题的疑惑,其实基本上每一个编程语言中都有一个this,这个this的指向都是大同小异,你也可以汉化它的意思,this的意思是这个,就是本身的意思,那么在JavaScript中,我们的this代替的那个本身到底会随着代码情况的不同而有什么变化呢?今天,我们就来一体探讨一下JavaScript中关于thi">
+<meta name="keywords" content="-javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript中的this指向问题">
+<meta property="og:url" content="http://github.com/blackgan3/2016/03/29/JavaScript中的this指向问题/index.html">
+<meta property="og:site_name" content="Blackgan">
+<meta property="og:description" content="在深入学习JavaScript之后,我们越来越多的会遇到函数或者在对象内部中,对于this的指向问题的疑惑,其实基本上每一个编程语言中都有一个this,这个this的指向都是大同小异,你也可以汉化它的意思,this的意思是这个,就是本身的意思,那么在JavaScript中,我们的this代替的那个本身到底会随着代码情况的不同而有什么变化呢?今天,我们就来一体探讨一下JavaScript中关于thi">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-23T07:46:55.582Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javascript中的this指向问题">
+<meta name="twitter:description" content="在深入学习JavaScript之后,我们越来越多的会遇到函数或者在对象内部中,对于this的指向问题的疑惑,其实基本上每一个编程语言中都有一个this,这个this的指向都是大同小异,你也可以汉化它的意思,this的意思是这个,就是本身的意思,那么在JavaScript中,我们的this代替的那个本身到底会随着代码情况的不同而有什么变化呢?今天,我们就来一体探讨一下JavaScript中关于thi">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                        
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    未分类
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-JavaScript中的this指向问题" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        javascript中的this指向问题
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2016/03/29/JavaScript中的this指向问题/" class="article-date">
+            <time datetime="2016-03-29T14:21:25.000Z" itemprop="datePublished">2016-03-29</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/javascript/">-javascript</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>在深入学习JavaScript之后,我们越来越多的会遇到函数或者在对象内部中,对于this的指向问题的疑惑,其实基本上每一个编程语言中都有一个this,这个this的指向都是大同小异,你也可以汉化它的意思,this的意思是这个,就是本身的意思,那么在JavaScript中,我们的this代替的那个本身到底会随着代码情况的不同而有什么变化呢?今天,我们就来一体探讨一下JavaScript中关于this的指向问题:<br><a id="more"></a><br>首先呢,this可以指向window对象,和其他调用它的对象,当然,在严格模式下,它指向undefined,那我们就先来看一下最简单的形式,代码1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1 function People (name,age)&#123;</span><br><span class="line">2      this.name = name;</span><br><span class="line">3      this.age    = age;</span><br><span class="line">4 &#125;</span><br><span class="line">5 var xiaoMing=new People(&apos;xiaoming&apos;,13);</span><br><span class="line">6 alert(xiaoMing.name);//这时会弹出xiaoming</span><br></pre></td></tr></table></figure></p>
+<p>上边呢,是我们对于this的理解最简单的一种形式,xiaoMing是我们通过构造函数People新创建的一个对象,那么函数中的this指向的就是我们的对象xiaoMing,所有当我们调用xiaoMing.name的时候,会弹出它的名字,注意,在这里我们美创建一个对象,这个对象就会有它自己本身的this来指向它本身,好了,这是我们应用中最简单的一种方式,相信大家对于这种方式都不会有疑惑.我们接着往下看,代码2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function People (name,age,shoes)&#123;</span><br><span class="line">this.name = name;</span><br><span class="line">this.age = age;</span><br><span class="line">this.shoes =shoes</span><br><span class="line">this.run = function ()&#123;</span><br><span class="line">console.log(this.name+&quot;穿着&quot;+this.shoes+&quot;在跑步&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">var xiaoMing=new People(&apos;xiaoming&apos;,13,&apos;nike&apos;);</span><br><span class="line">xiaoMing.run();//xiaoming穿着nike在跑步</span><br></pre></td></tr></table></figure></p>
+<p>那么这里呢,我们就可以看到,在类中的方法,调用到了类中的属性,是可以调用的,这个就像你要去跑步,而鞋子就是你自己的,那么你当然可以穿着你的nike鞋子去跑步了,好了,现在到了这里,我们应该都可以理解,这就是我们最基本的用法.我们接着往下看,代码3:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> 1 var name = &quot;小红&quot;;</span><br><span class="line"> 2 var shoes= &quot;adidas&quot;</span><br><span class="line"> 3 function People (name,age,shoes)&#123;</span><br><span class="line"> 4      this.name  = name;</span><br><span class="line"> 5      this.age   = age;</span><br><span class="line"> 6      this.shoes =shoes</span><br><span class="line"> 7      this.run   = (function ()&#123;</span><br><span class="line"> 8          return function()&#123;</span><br><span class="line"> 9              console.log(this.name+&quot;穿着&quot;+this.shoes+&quot;在跑步&quot;);</span><br><span class="line">10          &#125;</span><br><span class="line">11      </span><br><span class="line">12      &#125;)();</span><br><span class="line">13 &#125;</span><br><span class="line">14 var xiaoMing=new People(&apos;xiaoming&apos;,13,&apos;nike&apos;);</span><br><span class="line">15     xiaoMing.run();//1.html:241 xiaoming穿着nike在跑步</span><br><span class="line">16 var other = xiaoMing.run;</span><br><span class="line">17          other();//1.html:241 小红穿着adidas在跑步</span><br></pre></td></tr></table></figure></p>
+<p>好了从上边的代码中,我们可以明显的看到this在对象中的指向问题,要记住一点,this指向的是对象,是一个对象实体,是一个有意义的,它并不指向函数,例如代码3的第15行,run函数自调用返回的是一个闭包,有人可能会觉得第15行会返回小红,但因为第15行的调用者还是xiaoMing,所以它返回的是xiaoMing的方法,这就与第17行形成一个对比.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> 1 function People (name,age,shoes)&#123;</span><br><span class="line"> 2      this.name  = name;</span><br><span class="line"> 3      this.age   = age;</span><br><span class="line"> 4      this.shoes =shoes</span><br><span class="line"> 5      this.run   = (function ()&#123;</span><br><span class="line"> 6         var timer= setInterval(function()&#123;</span><br><span class="line"> 7         console.log(this.name+&quot;穿着&quot;+this.shoes+&quot;在跑步&quot;);</span><br><span class="line"> 8      &#125;,30)</span><br><span class="line"> 9              </span><br><span class="line">10          </span><br><span class="line">11      </span><br><span class="line">12      &#125;)();</span><br><span class="line">13 &#125;</span><br><span class="line">14 var xiaoMing=new People(&apos;xiaoming&apos;,13,&apos;nike&apos;);</span><br><span class="line">15 //这里会疯狂的输出小红.</span><br></pre></td></tr></table></figure></p>
+<p>这里就出来了我们要说明的第一个问题,当this在定时器当中时,this的指向为变为window,所以我们也可以这样理解,this的指向并不是定义的时候就确定的,而是在调用时确定的,这也就给我们带来了这么多的不确定性,对于this来说,我们最常用的方式,也是最容易出现指向错误的地方,应该就是匿名函数中:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> 1 var name = &quot;小红&quot;;</span><br><span class="line"> 2 var shoes= &quot;adidas&quot;</span><br><span class="line"> 3 function People (name,age,shoes)&#123;</span><br><span class="line"> 4      this.name  = name;</span><br><span class="line"> 5      this.age   = age;</span><br><span class="line"> 6      this.shoes =shoes</span><br><span class="line"> 7      this.run   = (function ()&#123;</span><br><span class="line"> 8         console.log(this.name+&quot;穿着&quot;+this.shoes+&quot;在跑步&quot;);</span><br><span class="line"> 9 </span><br><span class="line">10      &#125;)();</span><br><span class="line">11              </span><br><span class="line">12          </span><br><span class="line">13     </span><br><span class="line">14 &#125;</span><br><span class="line">15 var xiaoMing=new People(&apos;xiaoming&apos;,13,&apos;nike&apos;);</span><br><span class="line">16 //输出小红</span><br></pre></td></tr></table></figure>
+<p>对于匿名函数,我么可以这样去理解,每一个函数在执行的i时候都会去寻找它的this调用者和arguments参数,而匿名函数的this是window,所以匿名函数的执行具有全局性,所以,我们在使用匿名函数时,一定要注意它的this指向问题,我们我们可以使用that捕获,call apply和bind等方式去改正this的指向问题,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> 1 var name = &quot;小红&quot;;</span><br><span class="line"> 2 var shoes= &quot;adidas&quot;</span><br><span class="line"> 3 function People (name,age,shoes)&#123;</span><br><span class="line"> 4      this.name  = name;</span><br><span class="line"> 5      this.age   = age;</span><br><span class="line"> 6      this.shoes =shoes</span><br><span class="line"> 7      this.run   = (function ()&#123;</span><br><span class="line"> 8         console.log(this.name+&quot;穿着&quot;+this.shoes+&quot;在跑步&quot;);</span><br><span class="line"> 9         </span><br><span class="line">10      &#125;)();</span><br><span class="line">11      return &#123;&#125;;</span><br><span class="line">12              </span><br><span class="line">13          </span><br><span class="line">14     </span><br><span class="line">15 &#125;</span><br><span class="line">16 var xiaoMing=new People(&apos;xiaoming&apos;,13,&apos;nike&apos;);</span><br><span class="line">17 console.log(xiaoMing.name);//undefined</span><br></pre></td></tr></table></figure></p>
+<p>这里我们需要注意另外一个问题,就是当我们构造函数中有一个return返回值时,且这个返回值时一个对象的时候,那么this会指向这个返回的对象,而一般我们的构造函数都是没有返回值,这是我们另外要注意的一点.</p>
+<p>好了,讲到这里,希望大家对于this的理解能够多一点点,在应用中我们多用下this,会加深我们对this的理解.有不足的地方还希望指正,谢谢!</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://github.com/blackgan3/2016/03/29/JavaScript中的this指向问题/" data-id="cjf3ncr0c00032sqxlikp81rv" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/blackgan3" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2016/04/10/JavaScript中的事件机制/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            jquery中的事件机制
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2016/03/26/JavaScript中的事件委托机制/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">javascript事件委托机制</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/23/nodejs环境配置安装/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/23/nodejs环境配置安装/" class="title">nodejs环境配置安装</a></p>
+                            <p class="item-date"><time datetime="2018-03-23T07:48:49.000Z" itemprop="datePublished">2018-03-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/21/hello-world/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/21/hello-world/" class="title">Hello World</a></p>
+                            <p class="item-date"><time datetime="2018-03-21T11:44:28.781Z" itemprop="datePublished">2018-03-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/21/从JavaScript的事件循环到Promise/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/21/从JavaScript的事件循环到Promise/" class="title">从JavaScript的事件循环到Promise</a></p>
+                            <p class="item-date"><time datetime="2018-03-21T11:40:08.000Z" itemprop="datePublished">2018-03-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/02/23/ES6中的Generator函数/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/02/23/ES6中的Generator函数/" class="title">ES6中的Generator函数</a></p>
+                            <p class="item-date"><time datetime="2018-02-23T07:44:42.000Z" itemprop="datePublished">2018-02-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/09/02/nodejs基本语法/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/09/02/nodejs基本语法/" class="title">nodejs基本语法</a></p>
+                            <p class="item-date"><time datetime="2016-09-02T06:36:41.000Z" itemprop="datePublished">2016-09-02</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">-javascript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/javascript/" style="font-size: 15px;">-javascript</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nodejs/" style="font-size: 15px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/事件/" style="font-size: 10px;">事件</a> <a href="/tags/闭包/" style="font-size: 10px;">闭包</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 Blackgan</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://github.com/blackgan3/2016/03/29/JavaScript中的this指向问题/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>nodejs基本语法 | Blackgan</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="javascript,nodejs" />
+    
+    <meta name="description" content="nodejs是JavaScript的一个在后端的运行环境,关于nodejs的认识,我们可以看上一篇文章&amp;lt;&amp;lt;初识nodejs&amp;gt;&amp;gt;,我们要使用nodejs,首先要安装nodejs,安装的东西你可理解为java中的运行环境一样,至于怎么安装,我们最好安装nvm(nodejs version manage),安装的过程也写在了另一篇博客&amp;lt;&amp;lt;nodejs安装&amp;gt;&amp;gt">
+<meta name="keywords" content="javascript,nodejs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nodejs基本语法">
+<meta property="og:url" content="http://github.com/blackgan3/2016/09/02/nodejs基本语法/index.html">
+<meta property="og:site_name" content="Blackgan">
+<meta property="og:description" content="nodejs是JavaScript的一个在后端的运行环境,关于nodejs的认识,我们可以看上一篇文章&amp;lt;&amp;lt;初识nodejs&amp;gt;&amp;gt;,我们要使用nodejs,首先要安装nodejs,安装的东西你可理解为java中的运行环境一样,至于怎么安装,我们最好安装nvm(nodejs version manage),安装的过程也写在了另一篇博客&amp;lt;&amp;lt;nodejs安装&amp;gt;&amp;gt">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-23T07:47:53.200Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nodejs基本语法">
+<meta name="twitter:description" content="nodejs是JavaScript的一个在后端的运行环境,关于nodejs的认识,我们可以看上一篇文章&amp;lt;&amp;lt;初识nodejs&amp;gt;&amp;gt;,我们要使用nodejs,首先要安装nodejs,安装的东西你可理解为java中的运行环境一样,至于怎么安装,我们最好安装nvm(nodejs version manage),安装的过程也写在了另一篇博客&amp;lt;&amp;lt;nodejs安装&amp;gt;&amp;gt">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                        
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    未分类
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-nodejs基本语法" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        nodejs基本语法
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2016/09/02/nodejs基本语法/" class="article-date">
+            <time datetime="2016-09-02T06:36:41.000Z" itemprop="datePublished">2016-09-02</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/javascript/">javascript</a>, <a class="tag-link" href="/tags/nodejs/">nodejs</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>nodejs是JavaScript的一个在后端的运行环境,关于nodejs的认识,我们可以看上一篇文章&lt;&lt;初识nodejs&gt;&gt;,我们要使用nodejs,首先要安装nodejs,安装的东西你可理解为java中的运行环境一样,至于怎么安装,我们最好安装nvm(nodejs version manage),安装的过程也写在了另一篇博客&lt;&lt;nodejs安装&gt;&gt;(那时懵懂期,回头再修改的详细一点)<br><a id="more"></a></p>
+<hr>
+<p>那么nodejs作为一个后台的平台,他可以为我们提供的很多,我们可以用JavaScript语言进行文件的获取,删除等等文件操作,我们可以用JavaScript开一个本地服务器,我们可以和mongoDB配合来搭建后台,他给我们前端带来了太多的惊喜,让我们深深的迷恋上了它,但正所谓学一个新知识时,我们都需要从简,从基础学起,那么在nodejs环境下,我们的基本语法又是怎样的呢?</p>
+<h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><hr>
+<p>nodejs是支持ES6的,所以在这里你可以尽情的去写,不用考虑浏览器不兼容了(这里是后端,哈哈),安装好了nodejs后,我们在终端输入node,就会进入到nodejs环境,这里我们可以输入:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(&quot;hello world!&quot;);</span><br></pre></td></tr></table></figure></p>
+<p>可以看到我们控制台输出了hello world,我第一次写的时候还以为这是chrome的开发者模式呢,这或许就是chrom v8引擎的作用吧,我们这些简单的指令可以直接在终端中输出,那么如果是运行一大段代码呢?我们可以写个js文件里边,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">在hello.js中</span><br><span class="line">var hello = function()&#123;</span><br><span class="line">    console.log(&quot;hello function&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">hello();</span><br></pre></td></tr></table></figure></p>
+<p>然后node hello.js,这样我们文件中写的程序就能运行出来了,nodejsshi是基于commonJS的,所以当我们的程序变大的时候,就可以使用模块了,nodejs是模块化的,什么是模块,每个模块就是nodejs的每个功能,我们有http模块来提供服务器,有fs模块来提供对文件操作的各种功能,我们写的代码可以分成一个一个的模块,这样可以提高我们代码的复用性,以及减少代码之间的耦合性,可以避免函数名和变量名的冲突.</p>
+<hr>
+<p>java和python使用<strong>import</strong>来导入其他函数库,而php和ruby是通过require,上边也说过,nodejs是基于CommonJS的,在node中我们可以使用<strong>require</strong>这个关键字来导入模块.例如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var http = require(&apos;http&apos;);</span><br><span class="line">var fs   = require(&apos;fs&apos;);</span><br></pre></td></tr></table></figure></p>
+<p>首先,我们可以使用原生的和外部的模块,这些模块都是别人写好的或者nodejs自带的,他们都给我们提供各种各样的功能,我们只需要直接require它们就能使用了,<br>其次,我们也可以自己编写模块,比如你讲一个输出hello的函数单独封装成一个模块,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//这里是hello模块</span><br><span class="line">(function()&#123;</span><br><span class="line">    var hello = function()&#123;</span><br><span class="line">        console.log(&quot;hello&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    export.hello = hello;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
+<p>这里我们使用exports导出hello函数,然后再另一文件中通过require导入另一个模块,这时再另一个模块中,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var hello = require(&apos;hello.js&apos;);//然后运行hello</span><br><span class="line">hello.hello();//这时输出hello</span><br></pre></td></tr></table></figure></p>
+<p>我们还有另一种导出方法,在hello.js中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">module.exports=hello;//通过这种导出方法,我们在使用它的时候的用法为:</span><br><span class="line">---</span><br><span class="line">var hello = require(&apos;hello.js&apos;);</span><br><span class="line">hello();//这时输出hello</span><br></pre></td></tr></table></figure></p>
+<p>这时我们就出现了不同的地方</p>
+<h3 id="exports和module-exports的区别"><a href="#exports和module-exports的区别" class="headerlink" title="exports和module.exports的区别"></a>exports和module.exports的区别</h3><hr>
+<p>在讲他们的区别之前,我们先来看一个例子,这个例子以及他们区别的理解我是在[node中文社区][1]学习的.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var a =&#123;name:&quot;小明&quot;&#125;;</span><br><span class="line">var b =a;</span><br><span class="line">console.log(a.name);</span><br><span class="line">console.log(b.name);</span><br><span class="line">//输出 小明 小明</span><br><span class="line">b.name=&quot;小李&quot;;</span><br><span class="line">console.log(a.name);</span><br><span class="line">console.log(b.name);</span><br><span class="line">//输出 小李 小李</span><br></pre></td></tr></table></figure></p>
+<p>这里,由于a直接赋给b,这是b相当于a的引用,a和b指向同一块存储区域,这是改变了b的name,相应的a的name也发生了改变.那么这就引出了我们要讲的:</p>
+<blockquote>
+<ul>
+<li>module.exports原本就是一个空对象</li>
+<li>exprots是这个对象的一个引用</li>
+<li>平时我们require进来的就是module.exports对象</li>
+</ul>
+</blockquote>
+<p>上边这<strong>三大法则</strong>就是module.exports和exports的主要区别,我们可以这样来看:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">exports = module.exports;</span><br><span class="line">所以现在exports.hello = hello;</span><br><span class="line">就相当于module.exports.hello = hello;</span><br><span class="line">当另一文件导入var hello = require(&apos;hello.js&apos;);时</span><br><span class="line">因为是导入了module.exports这个对象,所以使用hello的时候,是:</span><br><span class="line">    hello.hello();</span><br></pre></td></tr></table></figure></p>
+<p>所以我们导出模块的时候,直接使用module.exports=hello;就行了.</p>
+<hr>
+<p>据说nodejs可以使用c/c++编写二进制模块,但因为前端出身的我虽然学过c/c++但研究不深,我还是好好的用JavaScript吧!</p>
+<hr>
+<p>当我们需要使用一些线上的模块时,只需要去nodejs.org里边去搜索,然后使用npm install就可以了,npm是和nodejs捆绑在一起的,</p>
+<h2 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h2><hr>
+<p>回调函数是什么呢?我们对于JavaScript中的函数应该不陌生了吧,回到函数就是JavaScript中的函数.当在nodejs中,回调函数是来实现异步调用的,回调函数被称为要去完成的任务,nodejs中很频繁的使用回调函数,nodejs中的所有的API模块都是由回调函数所实现的.由回调函数来实现异步调用,其实就是给你造成一种假象,让你像使用ajax一样让你感觉很顺畅,不堵不堵不堵(嘿嘿嘿)!<br>我们先提前看一下nodejs在读取文件的时候的一个操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//这里有一个input.txt文件,里边的内容为:&quot;这是一个测试文件&quot;</span><br><span class="line">var fs = require(&apos;fs&apos;);</span><br><span class="line">var data = fs.readFileSync(&apos;input.txt&apos;);//同步操作</span><br><span class="line">console.log(data.toString());</span><br><span class="line">console.log(&quot;程序结束&quot;);</span><br></pre></td></tr></table></figure></p>
+<p>运行这个文件后显示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">这是一个测试文件</span><br><span class="line">程序结束</span><br><span class="line">//这是我们很容易理解的程序流程,程序从上往下一次执行,</span><br></pre></td></tr></table></figure></p>
+<p>那我们再来看一个<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//input.txt文件中的内容不变,</span><br><span class="line">var fs = require(&apos;fs&apos;);</span><br><span class="line">fs.readFile(&apos;input.txt&apos;,function(err,data)&#123;</span><br><span class="line">    if(err)&#123;return console.eror(err)&#125;</span><br><span class="line">    console.log(data.toString());</span><br><span class="line">&#125;);</span><br><span class="line">console.log(&quot;程序结束&quot;);</span><br></pre></td></tr></table></figure></p>
+<p>这时我们再运行这个程序,就会发现输出的内容为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">程序结束</span><br><span class="line">这是一个测试文件</span><br><span class="line">//这是我们会发现先输出的是&quot;程序结束&quot;</span><br></pre></td></tr></table></figure></p>
+<p>我们先不用去纠结上边那个函数是什么意思,我们应该能看得出来,第二次的函数是一个回调函数,这就是我们的阻塞和非阻塞IO的区别,当程序执行到异步的读文件时,会先将这个相对耗时多的步骤存入一个事件循环(looping)中,转而去执行下边的程序,等到下边的程序执行完了之后再回去执行回调函数这个它存起来的任务,而在程序执行的时候就给我造成一个感觉,好快!这就是我们异步调用,至少目前我感觉,这个异步调用时nodejs的利器.</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>nodejs的基本语句还是JavaScript,只不过它是模块化开发,更有利我们去管理代码,他的异步调用时他的一大利器,这不同于其他多线程的语言,我们只是通过回调函数来实现这一功能,所以它对服务器的压力也不大!<br>  [1]: <a href="https://cnodejs.org/topic/5231a630101e574521e45ef8" target="_blank" rel="noopener">https://cnodejs.org/topic/5231a630101e574521e45ef8</a></p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://github.com/blackgan3/2016/09/02/nodejs基本语法/" data-id="cjf3ncr17000b2sqxr7vutyzr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/blackgan3" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/02/23/ES6中的Generator函数/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            ES6中的Generator函数
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2016/08/27/初识nodejs/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">初识nodejs</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/23/nodejs环境配置安装/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/23/nodejs环境配置安装/" class="title">nodejs环境配置安装</a></p>
+                            <p class="item-date"><time datetime="2018-03-23T07:48:49.000Z" itemprop="datePublished">2018-03-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/21/hello-world/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/21/hello-world/" class="title">Hello World</a></p>
+                            <p class="item-date"><time datetime="2018-03-21T11:44:28.781Z" itemprop="datePublished">2018-03-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/21/从JavaScript的事件循环到Promise/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/21/从JavaScript的事件循环到Promise/" class="title">从JavaScript的事件循环到Promise</a></p>
+                            <p class="item-date"><time datetime="2018-03-21T11:40:08.000Z" itemprop="datePublished">2018-03-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/02/23/ES6中的Generator函数/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/02/23/ES6中的Generator函数/" class="title">ES6中的Generator函数</a></p>
+                            <p class="item-date"><time datetime="2018-02-23T07:44:42.000Z" itemprop="datePublished">2018-02-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/09/02/nodejs基本语法/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/09/02/nodejs基本语法/" class="title">nodejs基本语法</a></p>
+                            <p class="item-date"><time datetime="2016-09-02T06:36:41.000Z" itemprop="datePublished">2016-09-02</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">-javascript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/javascript/" style="font-size: 15px;">-javascript</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nodejs/" style="font-size: 15px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/事件/" style="font-size: 10px;">事件</a> <a href="/tags/闭包/" style="font-size: 10px;">闭包</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 Blackgan</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://github.com/blackgan3/2016/09/02/nodejs基本语法/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

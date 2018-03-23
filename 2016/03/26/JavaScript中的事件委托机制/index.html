@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>javascript事件委托机制 | Blackgan</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="-javascript" />
+    
+    <meta name="description" content="前言 这几天看到一个面试题,大概就是,让你给1000个li都添加一个click事件,应该怎么添加?大多数人第一开始的感觉可能就是,每个li上边都添加一个呗,那要是这样的话,估计面试的时候就会GG了,这里就是撤出了我们的事件冒泡和捕获机制,以及事件委托机制,对于上边这些,我们慢慢来看.">
+<meta name="keywords" content="-javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript事件委托机制">
+<meta property="og:url" content="http://github.com/blackgan3/2016/03/26/JavaScript中的事件委托机制/index.html">
+<meta property="og:site_name" content="Blackgan">
+<meta property="og:description" content="前言 这几天看到一个面试题,大概就是,让你给1000个li都添加一个click事件,应该怎么添加?大多数人第一开始的感觉可能就是,每个li上边都添加一个呗,那要是这样的话,估计面试的时候就会GG了,这里就是撤出了我们的事件冒泡和捕获机制,以及事件委托机制,对于上边这些,我们慢慢来看.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://github.com/blackgan3/2016/03/26/JavaScript中的事件委托机制/&quot;https://www.google.com.hk/url?sa=i&amp;rct=j&amp;q=&amp;esrc=s&amp;source=images&amp;cd=&amp;cad=rja&amp;uact=8&amp;ved=0ahUKEwjU_trj4ffPAhVKsY8KHcXZA5cQjRwIBw&amp;url=%68%74%74%70%3a%2f%2f%7a%6b%72%65%61%64%2e%63%6f%6d%2f%61%72%74%69%63%6c%65%2f%31%30%38%37%32%36%37%2e%68%74%6d%6c&amp;psig=AFQjCNGzGgynaGwhKfEEuEOPDqA4m5dpWA&amp;ust=1477547029456525&quot;">
+<meta property="og:updated_time" content="2018-03-23T07:47:08.786Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javascript事件委托机制">
+<meta name="twitter:description" content="前言 这几天看到一个面试题,大概就是,让你给1000个li都添加一个click事件,应该怎么添加?大多数人第一开始的感觉可能就是,每个li上边都添加一个呗,那要是这样的话,估计面试的时候就会GG了,这里就是撤出了我们的事件冒泡和捕获机制,以及事件委托机制,对于上边这些,我们慢慢来看.">
+<meta name="twitter:image" content="http://github.com/blackgan3/2016/03/26/JavaScript中的事件委托机制/&quot;https://www.google.com.hk/url?sa=i&amp;rct=j&amp;q=&amp;esrc=s&amp;source=images&amp;cd=&amp;cad=rja&amp;uact=8&amp;ved=0ahUKEwjU_trj4ffPAhVKsY8KHcXZA5cQjRwIBw&amp;url=%68%74%74%70%3a%2f%2f%7a%6b%72%65%61%64%2e%63%6f%6d%2f%61%72%74%69%63%6c%65%2f%31%30%38%37%32%36%37%2e%68%74%6d%6c&amp;psig=AFQjCNGzGgynaGwhKfEEuEOPDqA4m5dpWA&amp;ust=1477547029456525&quot;">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                        
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    未分类
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-JavaScript中的事件委托机制" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        javascript事件委托机制
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2016/03/26/JavaScript中的事件委托机制/" class="article-date">
+            <time datetime="2016-03-26T05:16:44.000Z" itemprop="datePublished">2016-03-26</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/javascript/">-javascript</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p> 这几天看到一个面试题,大概就是,让你给1000个li都添加一个click事件,应该怎么添加?大多数人第一开始的感觉可能就是,每个li上边都添加一个呗,那要是这样的话,估计面试的时候就会GG了,这里就是撤出了我们的事件冒泡和捕获机制,以及事件委托机制,对于上边这些,我们慢慢来看.<br><a id="more"></a><br>首先说一下事件冒泡和事件捕获机制,事件冒泡是有微软公司提出来的,事件捕获是有网景公司提出来的,当时两家是争论的不可开交,后来w3c也没办法,就采取了折中的方式,事件产生后先捕获后冒泡,</p>
+<p>通常,在js中监听事件的方法共有三种,分别是:<br>　<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">　  ele.addEventListener(type,listener,[useCapture]);//IE6~8不支持</span><br><span class="line">　  ele.attachEvent(&apos;on&apos;+type,listener);//IE6~10支持,IE11不支持</span><br><span class="line">　  ele.onClick=function()&#123;&#125;;//所有浏览器都支持</span><br></pre></td></tr></table></figure></p>
+<p>　　　<br>w3c规范中定义了三个事件阶段,依次是捕获阶段,目标阶段,冒泡阶段,而w3c指定的dom2级规定中,使用的是addEventListener来监听事件的.所以我们就以addEventListener来讲解,首先事假冒泡就像你从往水中扔一块石子,水中的气泡从下边往上冒一样,意思为触发事件后从子元素王父元素方向触发,而捕获机制则正好相反,捕获机制是从父元素往子元素方向进行事件触发,而addEventListener函数中的第三位参数正是来决定是使用捕获机制还是冒泡机制的,当useCapture为true是为捕获机制,当useCapture为false时是冒泡机制,我们看一下例子:</p>
+<p>　<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">　　&lt;div class=&quot;parent&quot;&gt;</span><br><span class="line">　　&lt;div class=&quot;child&quot;&gt;&lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">      &lt;script&gt;</span><br><span class="line">         var parent = document.getElementsByClassName(&apos;parent&apos;)[0];</span><br><span class="line">         var child  = document.getElementsByClassName(&apos;child&apos;)[0];</span><br><span class="line">         parent.addEventListener(&apos;click&apos;,function()&#123;</span><br><span class="line">         console.log(&quot;这里是父元素&quot;);</span><br><span class="line">         &#125;,false);</span><br><span class="line">   child.addEventListener(&apos;click&apos;,function()&#123;</span><br><span class="line">       console.log(&quot;这里是子元素&quot;);</span><br><span class="line">   &#125;,false);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>当我们点击子元素是显示上图,当我们将false改为true后就会发现执行顺序会反过来,这就是事件冒泡和捕获的区别,他们两个刚好相反,</p>
+<p><img src="&quot;https://www.google.com.hk/url?sa=i&amp;rct=j&amp;q=&amp;esrc=s&amp;source=images&amp;cd=&amp;cad=rja&amp;uact=8&amp;ved=0ahUKEwjU_trj4ffPAhVKsY8KHcXZA5cQjRwIBw&amp;url=%68%74%74%70%3a%2f%2f%7a%6b%72%65%61%64%2e%63%6f%6d%2f%61%72%74%69%63%6c%65%2f%31%30%38%37%32%36%37%2e%68%74%6d%6c&amp;psig=AFQjCNGzGgynaGwhKfEEuEOPDqA4m5dpWA&amp;ust=1477547029456525&quot;" alt="冒泡和捕获图解"><br>　　<br>那么使用这种<strong>绑定机制</strong>我们的弊端在于要去给每一个对象绑定事件会是一个特别麻烦的事情,当我们要删除一个事件或者要改变一个事件的时候会特别的繁琐,更重要的是,我们增加了JavaScript和dom节点之间的关联,而且一点出现循环引用,很有可能造成内存泄露,这些都是它的弊端,</p>
+<p>那么解决这种弊端的一种方法就是事件代理(event delegation),这个方法可以让你避免去给每一个节点一一的添加事件,它的做法是将这些监听事件去绑定到这些节点的父元素上,在父元素上的这个监听函数自动去判断是哪一个子元素触发的事件,从而可以对触发事件的子元素进行操作,这里我们给出的例子是davidwalsh所给出的一个例子:</p>
+<p> 　　现在我们有一个父元素ul和几个li子元素,<br>      <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul id=&quot;parent-list&quot;&gt;</span><br><span class="line">  	&lt;li id=&quot;post-1&quot;&gt;Item 1&lt;/li&gt;</span><br><span class="line">  	&lt;li id=&quot;post-2&quot;&gt;Item 2&lt;/li&gt;</span><br><span class="line">  	&lt;li id=&quot;post-3&quot;&gt;Item 3&lt;/li&gt;</span><br><span class="line">  	&lt;li id=&quot;post-4&quot;&gt;Item 4&lt;/li&gt;</span><br><span class="line">  	&lt;li id=&quot;post-5&quot;&gt;Item 5&lt;/li&gt;</span><br><span class="line">  	&lt;li id=&quot;post-6&quot;&gt;Item 6&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure></p>
+<p> 　　<br> 现在我们要实现的是,当我们点击每一个li节点的时候,都会输出li节点中的内容,按照上边的写法,你可以选中这些li,让后给他们加上这些方法,然后等到不需要了再将他们移除,如果有100个li,1000个li呢,这将会成为你的噩梦,较好的解决方法就是给父元素添加一个监听事件,之后的问题便是怎么去判断出来时哪一个li被点击了?　我们可以在监听事件中去判断当前event的target来判断是否是我们要找的节点,这里我们有一个简单的例子:<br>     <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> 	// 找到父元素,绑定一个监听事件</span><br><span class="line">document.getElementById(&quot;parent-list&quot;).addEventListener(&quot;click&quot;, function(e) &#123;</span><br><span class="line">    // e.target是点击的元素</span><br><span class="line">    // 如果它是li元素</span><br><span class="line">    if(e.target &amp;&amp; e.target.nodeName == &quot;LI&quot;) &#123;</span><br><span class="line">        //</span><br><span class="line">        console.log(&quot;List item &quot;, e.target.id.replace(&quot;post-&quot;, &quot;&quot;), &quot; was clicked!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p> 　　<br> 当ul中发生点击事件后,因为addEventListener默认是冒泡事件,所以监听事件会在底层事件冒泡过来时执行,在触发了事件后,去检测是否是我们要寻找的目标元素,如果不是,就会忽略过去,那我们不仅仅可以通过目标元素的标签是不是我们需要的目标元素,我们还可以根据目标元素的属性或者类名来进行检测,利用ele.maeches这个API来进行处理,<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> document.getElementById(&quot;myDiv&quot;).addEventListener(&quot;click&quot;,function(e) &#123;</span><br><span class="line">    // e.target 就是当前被点击的元素</span><br><span class="line">  if (e.target &amp;&amp; e.target.matches(&quot;a.classA&quot;)) &#123;</span><br><span class="line">    console.log(&quot;Anchor element clicked!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p> 　　　<br> 因此我们可以看得出来,使用事件代理这种方式,能够给我们带来很多的便捷,可以避免很多坑,使用事件代理是一种很强大的方法.</p>
+<blockquote>
+<blockquote>
+<p>如果你无法简洁的表达你的想法，那只说明你还不够了解它。 – 阿尔伯特·爱因斯坦</p>
+</blockquote>
+</blockquote>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://github.com/blackgan3/2016/03/26/JavaScript中的事件委托机制/" data-id="cjf3ncr0o00052sqxbkn8yon7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/blackgan3" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2016/03/29/JavaScript中的this指向问题/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            javascript中的this指向问题
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/23/nodejs环境配置安装/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/23/nodejs环境配置安装/" class="title">nodejs环境配置安装</a></p>
+                            <p class="item-date"><time datetime="2018-03-23T07:48:49.000Z" itemprop="datePublished">2018-03-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/21/hello-world/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/21/hello-world/" class="title">Hello World</a></p>
+                            <p class="item-date"><time datetime="2018-03-21T11:44:28.781Z" itemprop="datePublished">2018-03-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/21/从JavaScript的事件循环到Promise/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/21/从JavaScript的事件循环到Promise/" class="title">从JavaScript的事件循环到Promise</a></p>
+                            <p class="item-date"><time datetime="2018-03-21T11:40:08.000Z" itemprop="datePublished">2018-03-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/02/23/ES6中的Generator函数/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/02/23/ES6中的Generator函数/" class="title">ES6中的Generator函数</a></p>
+                            <p class="item-date"><time datetime="2018-02-23T07:44:42.000Z" itemprop="datePublished">2018-02-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/09/02/nodejs基本语法/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/09/02/nodejs基本语法/" class="title">nodejs基本语法</a></p>
+                            <p class="item-date"><time datetime="2016-09-02T06:36:41.000Z" itemprop="datePublished">2016-09-02</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">-javascript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/javascript/" style="font-size: 15px;">-javascript</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nodejs/" style="font-size: 15px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/事件/" style="font-size: 10px;">事件</a> <a href="/tags/闭包/" style="font-size: 10px;">闭包</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 Blackgan</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://github.com/blackgan3/2016/03/26/JavaScript中的事件委托机制/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

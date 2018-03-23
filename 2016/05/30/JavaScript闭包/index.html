@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>javascript闭包 | Blackgan</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="javascript,闭包" />
+    
+    <meta name="description" content="学习javaScript已经有一段时间了,在这段时间里,已经感受到了JavaScript的种种魅力,这是一门神奇的语言,同时也是一门正在逐步完善的语言,相信在大家的逐步修改中,这门语言会逐步的完善下去,在上一篇随笔中,和大家分享了JavaScript中独有的类中的继承方式,今天呢,就跟大家分享一下我这几天一直在搞,却还是搞的不是很透彻的闭包问题,">
+<meta name="keywords" content="javascript,闭包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript闭包">
+<meta property="og:url" content="http://github.com/blackgan3/2016/05/30/JavaScript闭包/index.html">
+<meta property="og:site_name" content="Blackgan">
+<meta property="og:description" content="学习javaScript已经有一段时间了,在这段时间里,已经感受到了JavaScript的种种魅力,这是一门神奇的语言,同时也是一门正在逐步完善的语言,相信在大家的逐步修改中,这门语言会逐步的完善下去,在上一篇随笔中,和大家分享了JavaScript中独有的类中的继承方式,今天呢,就跟大家分享一下我这几天一直在搞,却还是搞的不是很透彻的闭包问题,">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-23T07:47:53.181Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javascript闭包">
+<meta name="twitter:description" content="学习javaScript已经有一段时间了,在这段时间里,已经感受到了JavaScript的种种魅力,这是一门神奇的语言,同时也是一门正在逐步完善的语言,相信在大家的逐步修改中,这门语言会逐步的完善下去,在上一篇随笔中,和大家分享了JavaScript中独有的类中的继承方式,今天呢,就跟大家分享一下我这几天一直在搞,却还是搞的不是很透彻的闭包问题,">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                        
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    未分类
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-JavaScript闭包" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        javascript闭包
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2016/05/30/JavaScript闭包/" class="article-date">
+            <time datetime="2016-05-30T12:44:24.000Z" itemprop="datePublished">2016-05-30</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/javascript/">javascript</a>, <a class="tag-link" href="/tags/闭包/">闭包</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>　学习javaScript已经有一段时间了,在这段时间里,已经感受到了JavaScript的种种魅力,这是一门神奇的语言,同时也是一门正在逐步完善的语言,相信在大家的逐步修改中,这门语言会逐步的完善下去,在上一篇随笔中,和大家分享了JavaScript中独有的类中的继承方式,今天呢,就跟大家分享一下我这几天一直在搞,却还是搞的不是很透彻的闭包问题,<br><a id="more"></a><br>对于一个初学者而言,JavaScript中的闭包无疑是一个难点,而且也是我们必须要掌握的一个重点,那么今天我就跟大家分享一下我在学习闭包的时候的感悟以及相应的理解,首先,我们在一个函数中有一个变量: 代码1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1 function people()&#123;</span><br><span class="line">2     var age = 12;//函数中有一个变量</span><br><span class="line">3    ( function ()&#123; //在函数中我们再定义一个自调用函数</span><br><span class="line">4           alert(age);</span><br><span class="line">5     &#125;)();</span><br><span class="line">6    </span><br><span class="line">7 &#125;</span><br></pre></td></tr></table></figure></p>
+<p>在函数people中,有着变量age,大家应该之前都有了解到JavaScript中特有的变量作用域的问题,函数本身就是一个作用域,函数里边可以访问外边的变量,而函数外边并不能访问函数里边的变量,这样,我们就遇到了一个问题,如果我们想要获取函数中的变量age怎么办?如代码1中所示,因为自调用函数在people中,所以它可以访问它外边的变量,所以自调用函数可以访问age,那么我们就想,将这个自调用函数return出来不就行了吗?代码2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1 function people()&#123;</span><br><span class="line">2      var age = 12;</span><br><span class="line">3      return function ()&#123;</span><br><span class="line">4          alert(age);</span><br><span class="line">5      &#125;</span><br><span class="line">6  &#125;</span><br><span class="line">7  var xiaoMing = new people();</span><br><span class="line">8  xiaoMing();//会弹出文本框12,说明在people外边调用到了内部变量age</span><br></pre></td></tr></table></figure></p>
+<p>好了,通过这种方法,我们获得了函数内部的变量,那么这就叫做闭包(closure),上边的功能就是它的第一个功能,可以在函数外部通过闭包获得函数内部的变量,从形状上看,闭包就是函数里边再定义一个函数并返回,从书上以及各个博客上看到了对闭包的解释各种各样,我对闭包的理解而言,整个函数就相当于一个房子,这个房子没有门,只有一个天窗,我们在下边无法看见房子里边放的东西,而闭包就像是一个梯子,让我们爬上去可以通过天窗看到房子里边放的东西,就是连接函数外边和里边的一座桥梁,闭包对于我们的便利性是不言而喻的,然而,事物总是有着相反的一面,闭包有他的好,当然也有它的坏,现在,我们可以先用闭包做一个累加的例子:代码3:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1 function func()&#123;</span><br><span class="line">2      var count=10;</span><br><span class="line">3      return function()&#123;</span><br><span class="line">4          return ++count;</span><br><span class="line">5      &#125;</span><br><span class="line">6  &#125;</span><br><span class="line">7  var ss = new func();</span><br><span class="line">8  alert(ss());//弹出11</span><br><span class="line">9  alert(ss());//弹出12</span><br></pre></td></tr></table></figure></p>
+<p>通过代码3我们可以看出,每次调用func中返回的闭包时,count是在累加的,这时我们心中肯定就会有很多疑惑,不是说好的函数是一个作用域吗?执行完了函数func它体内的变量应该不存在了呀?怎么每次调用的时候它都在累加呢?这就是闭包的第二个作用了,当闭包在函数体外执行时,它的体内保存了原来算是它的父类的函数的整个执行环境以及它体内调用的变量,这时他们的关系就像我们盖房子一样,func就像地基一样,ss就是我们的房顶,这时我们站在房顶上,那么地基会消失吗?显然是不能的,这时闭包的一个优点,同时也算是它的一个缺点,就是它将一个内部变量一直放到了内存中释放不了,有可能会造成内存泄露,但这也是它的一个优点,可以将作用域链拉长,但这个功能在for循环中是一个经常出错的地方:</p>
+<p>代码4:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> 1 function func()&#123;</span><br><span class="line"> 2      var arr=[];</span><br><span class="line"> 3      for (var i=0;i&lt;5;i++)&#123;</span><br><span class="line"> 4          arr[i]=function ()&#123;//注意此处,往数组中存放的是一个函数</span><br><span class="line"> 5              return i;</span><br><span class="line"> 6          &#125;</span><br><span class="line"> 7      &#125;</span><br><span class="line"> 8      return arr;</span><br><span class="line"> 9  &#125;</span><br><span class="line">10  var arr=func();</span><br><span class="line">11  for(var i=0;i&lt;5;i++)&#123;</span><br><span class="line">12      console.log(arr[i]());//这时会返回五个5</span><br><span class="line">13  &#125;</span><br></pre></td></tr></table></figure></p>
+<p>这时我们是否也会感到同样的疑惑,这不是应该返回0-4吗?这正是闭包在应用中的一个坑,这时,我们可以这样理解,当往arr[0]中存放第一个闭包函数时,函数并没有执行,那么这时闭包中就存放了i的一个链接,它也不知道i的值是多少,当func执行完了,这时闭包中存放在i的一个作用域链接,当执行arr数组中的函数时,由于数组中的函数没有i这个变量,所以它要向上一级去寻找,这时,它就找到了func中,而此时func中i的值已经变为5了,所以输出的每一个数都是5.那么有因就有果,有好就有坏,有错误我们就有方法去解决:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> 1 function func()&#123;</span><br><span class="line"> 2      var arr=[];</span><br><span class="line"> 3      for (var i=0;i&lt;5;i++)&#123;</span><br><span class="line"> 4          arr[i]=(function (num)&#123;</span><br><span class="line"> 5              return i;</span><br><span class="line"> 6          &#125;)(i);//这时使用自调用函数</span><br><span class="line"> 7      &#125;</span><br><span class="line"> 8      return arr;</span><br><span class="line"> 9  &#125;</span><br><span class="line">10  var arr=func();</span><br><span class="line">11  for(var i=0;i&lt;5;i++)&#123;</span><br><span class="line">12      console.log(arr[i]);//这时会输出0-4</span><br><span class="line">13  &#125;</span><br></pre></td></tr></table></figure></p>
+<p>修改的方法一:就是将闭包改为一个自调用函数这时,传入arr[i]中的不再是一个函数,而是传入的参数i,以此类推,我们还可以返回一个闭包,只不过要让闭包中存放一个确定的值,而不再是一个变量:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> 1 function func()&#123;</span><br><span class="line"> 2      var arr=[];</span><br><span class="line"> 3      for (var i=0;i&lt;5;i++)&#123;</span><br><span class="line"> 4          arr[i]=function (num)&#123;</span><br><span class="line"> 5              return function()&#123;</span><br><span class="line"> 6                  return num;</span><br><span class="line"> 7              &#125;</span><br><span class="line"> 8          &#125;(i);</span><br><span class="line"> 9      &#125;</span><br><span class="line">10      return arr;</span><br><span class="line">11  &#125;</span><br><span class="line">12  var arr=func();</span><br><span class="line">13  for(var i=0;i&lt;5;i++)&#123;</span><br><span class="line">14      console.log(arr[i]());//这时会输出0-4</span><br><span class="line">15  &#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用这种方案的时候,用新创建的函数的参数绑定循环变量当前的值，无论该循环变量后续如何更改，已绑定到函数参数的值不变,所以在使用闭包时,尽量不要将后续会发生变化的变量放到闭包中.同时,闭包不仅会改变函数中的变量的使用范围变广,它同时也会改变this的作用域:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> 1  var name=&quot;kkkk&quot;;</span><br><span class="line"> 2 function People()&#123;</span><br><span class="line"> 3     this.name=&quot;lala&quot;,</span><br><span class="line"> 4     this.getName=function()&#123;</span><br><span class="line"> 5         return function()&#123;</span><br><span class="line"> 6             alert(this.name)</span><br><span class="line"> 7         &#125;;</span><br><span class="line"> 8     &#125;</span><br><span class="line"> 9 &#125;</span><br><span class="line">10 var xiaoMing=new People();</span><br><span class="line">11 xiaoMing.getName()();//这时会弹出kkkk</span><br></pre></td></tr></table></figure></p>
+<p>这时,当我们返回一个闭包时,它当中存放的this绑定的对象是window,而不是People,其中的原理:我的理解就是,当你返回一个函数时,它其中的this是封闭在其中的那时候还没有执行函数,所以this的指向还没有确定,当在对象外执行闭包时,this回去找它要指向的对象,这时它就会指向window,我们可以用that来捕获this:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> 1  var name=&quot;kkkk&quot;;</span><br><span class="line"> 2 function People()&#123;</span><br><span class="line"> 3     this.name=&quot;lala&quot;,</span><br><span class="line"> 4     this.getName=function()&#123;</span><br><span class="line"> 5         var that=this;</span><br><span class="line"> 6         return function()&#123;</span><br><span class="line"> 7             alert(that.name)</span><br><span class="line"> 8         &#125;;</span><br><span class="line"> 9     &#125;</span><br><span class="line">10 &#125;</span><br><span class="line">11 var xiaoMing=new People();</span><br><span class="line">12 xiaoMing.getName()();</span><br></pre></td></tr></table></figure></p>
+<p>这时再输出就是lala了,当然,我们不仅可以使用这种方式来捕获this,我们还可以使用之前所学的对象冒充的方法来执行函数:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> 1 var name=&quot;kkkk&quot;;</span><br><span class="line"> 2 function People()&#123;</span><br><span class="line"> 3     this.name=&quot;lala&quot;,</span><br><span class="line"> 4     this.getName=function()&#123;</span><br><span class="line"> 5         return function()&#123;</span><br><span class="line"> 6             alert(this.name)</span><br><span class="line"> 7         &#125;;</span><br><span class="line"> 8     &#125;</span><br><span class="line"> 9 &#125;</span><br><span class="line">10 var xiaoMing=new People();</span><br><span class="line">11 xiaoMing.getName().apply(xiaoMing,[]);</span><br></pre></td></tr></table></figure></p>
+<p>使用这种方式同样可以达到我们想要的目的,同时,我们使用call也是可以的.到了这里,大家应该对闭包有了一个初步的了解吧,闭包这种东西,可能理解的时候好理解一些,但是当我们实际应用的时候,刚开始可能会感觉到十分的吃力,但我们应该相信,熟能生巧,而且闭包这种东西,可能我们每天都在用,可对于它内在的原理还是一知半解,这个一定要多做练习,多做实验,当你有疑问的时候,就把代码打下来去运行一下,看一下结果,再想一下为什么会是这种结果,大家,一起加油!</p>
+<p>本博文是博主原创,如有转载请说明出处!</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://github.com/blackgan3/2016/05/30/JavaScript闭包/" data-id="cjf3ncr0w00072sqxeqq3z0nz" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/blackgan3" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2016/06/10/Angularjs指令/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            Angularjs指令
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2016/05/10/ajax详解/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">ajax详解</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/23/nodejs环境配置安装/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/23/nodejs环境配置安装/" class="title">nodejs环境配置安装</a></p>
+                            <p class="item-date"><time datetime="2018-03-23T07:48:49.000Z" itemprop="datePublished">2018-03-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/21/hello-world/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/21/hello-world/" class="title">Hello World</a></p>
+                            <p class="item-date"><time datetime="2018-03-21T11:44:28.781Z" itemprop="datePublished">2018-03-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/21/从JavaScript的事件循环到Promise/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/03/21/从JavaScript的事件循环到Promise/" class="title">从JavaScript的事件循环到Promise</a></p>
+                            <p class="item-date"><time datetime="2018-03-21T11:40:08.000Z" itemprop="datePublished">2018-03-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/02/23/ES6中的Generator函数/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/02/23/ES6中的Generator函数/" class="title">ES6中的Generator函数</a></p>
+                            <p class="item-date"><time datetime="2018-02-23T07:44:42.000Z" itemprop="datePublished">2018-02-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/09/02/nodejs基本语法/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/09/02/nodejs基本语法/" class="title">nodejs基本语法</a></p>
+                            <p class="item-date"><time datetime="2016-09-02T06:36:41.000Z" itemprop="datePublished">2016-09-02</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">-javascript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/javascript/" style="font-size: 15px;">-javascript</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nodejs/" style="font-size: 15px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/事件/" style="font-size: 10px;">事件</a> <a href="/tags/闭包/" style="font-size: 10px;">闭包</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 Blackgan</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://github.com/blackgan3/2016/05/30/JavaScript闭包/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

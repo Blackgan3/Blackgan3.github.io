@@ -9,17 +9,17 @@
     
         <meta name="keywords" content="" />
     
-    <meta name="description" content="12371728391729">
+    <meta name="description" content="JS线程是单线程运行机制，就是自己按顺序做自己的事，浏览器线程用于交互和控制，JS可以操作DOM元素，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从JavaScript的事件循环到Promise">
 <meta property="og:url" content="http://github.com/blackgan3/2018/03/21/从JavaScript的事件循环到Promise/index.html">
 <meta property="og:site_name" content="Blackgan">
-<meta property="og:description" content="12371728391729">
+<meta property="og:description" content="JS线程是单线程运行机制，就是自己按顺序做自己的事，浏览器线程用于交互和控制，JS可以操作DOM元素，">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-21T12:06:27.045Z">
+<meta property="og:updated_time" content="2018-03-23T07:47:53.191Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从JavaScript的事件循环到Promise">
-<meta name="twitter:description" content="12371728391729">
+<meta name="twitter:description" content="JS线程是单线程运行机制，就是自己按顺序做自己的事，浏览器线程用于交互和控制，JS可以操作DOM元素，">
     
 
     
@@ -148,7 +148,7 @@
                 
     <div class="article-date">
         <a href="/2018/03/21/从JavaScript的事件循环到Promise/" class="article-date">
-            <time datetime="2018-03-21T11:55:43.000Z" itemprop="datePublished">2018-03-21</time>
+            <time datetime="2018-03-21T11:40:08.000Z" itemprop="datePublished">2018-03-21</time>
         </a>
     </div>
 
@@ -157,7 +157,56 @@
         
         
         <div class="article-entry" itemprop="articleBody">
-            <p>12371728391729</p>
+            <p>JS线程是单线程运行机制，就是自己按顺序做自己的事，浏览器线程用于交互和控制，JS可以操作DOM元素，</p>
+<a id="more"></a>
+<p>说起JS中的异步时，我们需要注意的是，JS中其实有两种异步，一种是基于浏览器的异步IO，比如Ajax，另外一种是基于计时方法setTimeout和setInterval的异步。</p>
+<p>对于异步IO，比如ajax，写代码的时候都是顺序执行的，但是在真正处理请求的时候，有一个单独的浏览器线程来处理，并且在处理完成后会触发回调。这种情况下，参与异步过程的其实有2个线程主体，一个是javascript的主线程，另一个是浏览器线程。</p>
+<p>熟悉Javascript的人都知道，Javascript内部有一个事件队列，所有的处理方法都在这个队列中，Javascript主线程就是轮询这个队列处理，这个好处是使得CPU永远是忙碌状态。这个机制和Windows中的消息泵是一样的，都是靠消息（事件）驱动，</p>
+<p>对于setTimeout和setInterval来说，当js线程执行到该代码片段时，js主线程会根据所设定的时间，当设定的时间到期时，将设置的回调函数放到事件队列中，然后js主线程继续去执行下边的代码，当js线程执行完主线程上的代码之后，会去循环执行事件队列中的函数。至于setTimeout或者setInterval设定的执行时间在实际表现时会有一些偏差，普遍的一个解释为，当定时任务的时间到期时，本应该去执行该回调函数，但是这时js主线程可能还有任务在执行，或者是该回调函数再事件队列中排的比较靠后，就导致该回调函数执行时间与定时器设定时间不一致。</p>
+<p>那么问题来了，什么是事件队列？</p>
+<blockquote>
+<p>eventloop是一个用作队列的数组,eventloop是一个一直在循环执行的，循环的每一轮成为一个tick,在每一个tick中，如果队列中有等待事件，那么就会从队列中摘取下一个事件进行执行，这些事件就是我们之前的回调函数。现在ES6精确指定了事件循环的工作细节，这意味着在技术上将其纳入了JavaScript引擎的势力范围，而不只是由宿主环境决定了，主要的一个原因是ES6中promise的引入。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> eventloop = []</span><br><span class="line"><span class="keyword">var</span> event;</span><br><span class="line"><span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(eventloop.length&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">//拿到队列中的下一个事件</span></span><br><span class="line">        event = eventloop.shift();</span><br><span class="line">        <span class="comment">//现在执行下一个事件</span></span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            event();</span><br><span class="line">        &#125;<span class="keyword">catch</span>(e)&#123;</span><br><span class="line">            reportError(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>在浏览器端，setTimeout中的最小时间间隔是W3C在HTML标准中规定，规定要求低于4ms的时间间隔算为4ms。</p>
+<p>任何时候，只要把一个代码包装成一个函数，并指定它在响应某个事件时执行，你就是在代码中创建了一个将来执行的模块，也由此在这个程序中引入了异步机制。</p>
+<p>js引擎并不是独立运行的，它运行在宿主环境中，就是我们所看到的Web浏览器，当然，随着js的发展，包括最近的Node，便是给js提供了一个在服务器端运行的环境。并且现在的js还嵌入到了机器人到电灯泡的各种各样的设配中。</p>
+<p>但是这些所有的环境都有一个共同的“点”，即为都提供了一种机制来处理程序中的多个块的执行，且执行每个块时调用JavaScript引擎，这种机制被称为事件循环。</p>
+<p>js引擎本身并没有时间的概念，只是一个按需要执行JavaScript任意代码片段的环境。</p>
+<h4 id="对于js中的回调，我们最常见的就是链式回调和嵌套回调"><a href="#对于js中的回调，我们最常见的就是链式回调和嵌套回调" class="headerlink" title="对于js中的回调，我们最常见的就是链式回调和嵌套回调"></a>对于js中的回调，我们最常见的就是链式回调和嵌套回调</h4><p>我们经常再ajax中嵌套ajax调用然后再嵌套ajax调用，这就是回调地狱，回调最大的问题就是控制反转，它会导致信任链的完全断裂，为了解决回调中的控制反转问题，有些API提供了分离回调（一个用于成功通知，一个用于失败通知），例如ajax中的success函数和failure函数，这种情况下，API的出错处理函数failure()常常是可以省略的，如果没有提供的话，就是假定这个错误可以吞掉。</p>
+<p>还有一种回调模式叫做“error-first”风格，其中回调的第一个参数保留用作错误对象，如果成功的话，这个参数就会被清空/置假。</p>
+<p>回调函数是JavaScript异步的基础单元，但是随着JavaScript越来越成熟，对于异步领域的发展，回调已经不够用了。</p>
+<h4 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h4><p>Promise 是异步编程中的一种解决方案，最早由社区提出和实现，ES6将其写进了语言标准，统一了用法，原生提供了Promise对象。</p>
+<p>Promise是一种封装和组合未来值的易于复用的机制。一种在异步任务中作为两个或更多步骤的流程控制机制，时序上的this-then-that. 假定调用一个函数foo(),我们并不需要去关心foo中的更多细节，这个函数可能立即完成任务，也可能过一段时间才去完成。对于我们来讲，我们只需要知道foo()什么时候完成任务，这样我们就可以去继续执行下一个任务了，在传统的方法中，我们回去选择监听这个函数的完成度，当它完成时，通过回调函数通知我们，这时候通知我们就是执行foo中的回调，但是使用promise时，我们要做的是侦听来自foo的事件，然后在得到通知的时候，根据情况而定。</p>
+<p>其中一个重要的好出就是，我们可以把这个事件中的侦听对象提供给代码中多个独立的部分，在foo()完成的时候，他们都可以独立的得到通知:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> evt = foo();</span><br><span class="line"><span class="comment">//让bar()侦听foo()的完成</span></span><br><span class="line">bar(evt);</span><br><span class="line"><span class="comment">//让baz()侦听foo()的完成</span></span><br><span class="line">baz(evt);</span><br></pre></td></tr></table></figure>
+<p>上边的例子中，bar和baz中不需要去知道或者关注foo中的实现细节。而且foo也不需要去关注baz和bar中的实现细节。</p>
+<p>同样的道理，在promise中，前面的代码片段会让foo()创建并返回一个Promise实例，而且在这个Promise会被传递到bar()和baz()中。所以本质上，promise就是某个函数返回的对象。你可以把回调函数绑定再这个对象上，而不是把回调函数当成参数传进函数。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promise = doSomething();</span><br><span class="line">promsie.then(successCallback,failureCallback)&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当然啦，promise不像旧式函数将回调函数传递到两个处理函数中，而且会有一个优点：</p>
+<ul>
+<li>在JavaScript事件队列的本次tick运行完成之前，回调函数永远不会执行。</li>
+<li>通过.then形式添加的回调函数，甚至都在异步操作完成之后才被添加的函数，都会被调用。</li>
+<li>通过多次调用.then，可以添加多个回调函数，他们会按照插入顺序并且独立运行。</li>
+</ul>
+<p>但是，Promise最直接的好出就是链式调用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">doSomething().then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> doSomethingElse(result);</span><br><span class="line">&#125;)</span><br><span class="line">.then(<span class="function"><span class="keyword">function</span>(<span class="params">newResult</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> doThirdThing(newResult);</span><br><span class="line">&#125;)</span><br><span class="line">.then(<span class="function"><span class="keyword">function</span>(<span class="params">finalResult</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Got the final result: '</span> + finalResult);</span><br><span class="line">&#125;)</span><br><span class="line">.catch(failureCallback);</span><br></pre></td></tr></table></figure>
+<p>并且在一个失败操作之后还可以继续使用链式操作，即使链式中的一个动作失败之后还能有助于新的动作继续完成。</p>
+<p>在调用Promise中的resolve()和reject()函数时如果带有参数，那么他们的参数会被传递给回调函数。</p>
+<p>Promise.resolve()和Promise.reject()是手动创建一个已经resolve或者reject的promise快捷方法。通常，我们可以使用Promise.resolve()去链式调用一个由异步函数组成的数组。例如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.resolve().then(func1).then(func2);</span><br></pre></td></tr></table></figure></p>
+<p>Promise.all()和Promise。race()是并行运行异步操作的两个组合式工具。</p>
+<p>Promise.then()方法用来分别指定resolved状态和rejected状态的回调函数。传递到then中的函数被置入了一个微任务队列，而不是立即执行，这意味着它是在JavaScript事件队列的所有运行结束了，事件队列被清空之后才开始执行<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Promise'</span>);</span><br><span class="line">  resolve();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">promise.then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'resolved.'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'Hi!'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Promise</span></span><br><span class="line"><span class="comment">// Hi!</span></span><br><span class="line"><span class="comment">// resolved</span></span><br></pre></td></tr></table></figure></p>
+<p>Promise.then()方法返回一个Promise,它最多需要有两个参数：Promise的成功和失败情况的回调函数。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">p.then(onFulfilled, onRejected);</span><br><span class="line"></span><br><span class="line">p.then(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">   <span class="comment">// fulfillment</span></span><br><span class="line">  &#125;, <span class="function"><span class="keyword">function</span>(<span class="params">reason</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// rejection</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>onFulfilled:当Promise变成接受状态(fulfillment)时，该参数作为回调函数被调用。该函数有一个参数，即接受的值。</p>
+<p>onRejected:当Promise变成拒绝状态时，该参数作为回调函数被调用。该函数有一个参数，即拒绝的原因。</p>
+<p>Promise的状态一旦改变，就永久保持该状态，不会再改变了。</p>
+<h5 id="Promise中的错误处理"><a href="#Promise中的错误处理" class="headerlink" title="Promise中的错误处理"></a>Promise中的错误处理</h5><p>一般的情况，我们会在每次的Promise中抛出错误，在Promise中的then函数中的rejected处理函数会被调用，这是我们作为错误处理的常用方法：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">let</span> p = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve,reject</span>)</span>&#123;</span><br><span class="line">        reject(<span class="string">'error'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    p.then(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</span><br><span class="line">        success(value);</span><br><span class="line">    &#125;,<span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</span><br><span class="line">        error(error)   </span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<p>但是一种更好的方式是使用catch函数，这样可以处理Promise内部发生的错误，catch方法返回的还是一个Promise对象，后边还可以接着调用then方法。而且catch方法尽量写在链式调用的最后一个，避免后边的then方法的错误无法捕获。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve,reject</span>)</span>&#123;</span><br><span class="line">       reject(<span class="string">'error'</span>);</span><br><span class="line">   &#125;);</span><br><span class="line">   </span><br><span class="line">   p.then(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</span><br><span class="line">       success(value);</span><br><span class="line">   &#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="string">'error'</span>);</span><br><span class="line">   &#125;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Promise.finally()函数，该方法是ES2018引入标准的。指定不管Promise对象最后状态如何，都会执行的操作。finally方法的回调函数不接受任何参数，这意味着没有办法知道，前面的Promise状态到底是fulfilled还是rejected。这标明，finally方法里面的操作，是与状态无关的，不依赖于Promise的执行结果。</p>
+<hr>
+<p>上述文章，如有错误，还请指正，谢谢！！！</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://es6.ruanyifeng.com/?search=reduce&amp;x=0&amp;y=0#docs/promise" target="_blank" rel="noopener">阮一峰老师的ES6</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/then" target="_blank" rel="noopener">MDN中的Promise</a></li>
+</ul>
 
         </div>
         <footer class="article-footer">
@@ -165,7 +214,7 @@
 
 
 
-    <a data-url="http://github.com/blackgan3/2018/03/21/从JavaScript的事件循环到Promise/" data-id="cjf1zswaj0005jwqxkrrl4k65" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://github.com/blackgan3/2018/03/21/从JavaScript的事件循环到Promise/" data-id="cjf3ncr1n000l2sqxtvv2g6wi" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -262,20 +311,20 @@
         
 <nav id="article-nav">
     
-        <a href="/2018/03/21/JavaScript中的this指向问题/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2018/03/21/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">下一篇</strong>
         <p class="article-nav-title">
         
-            JavaScript中的this指向问题
+            Hello World
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/2018/03/21/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/02/23/ES6中的Generator函数/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">上一篇</strong>
-        <p class="article-nav-title">Hello World</p>
+        <p class="article-nav-title">ES6中的Generator函数</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -297,7 +346,7 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/03/21/nodejs基本语法/" class="thumbnail">
+                            <a href="/2018/03/23/nodejs环境配置安装/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -309,15 +358,15 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/03/21/nodejs基本语法/" class="title">nodejs基本语法</a></p>
-                            <p class="item-date"><time datetime="2018-03-21T13:08:30.000Z" itemprop="datePublished">2018-03-21</time></p>
+                            <p class="item-title"><a href="/2018/03/23/nodejs环境配置安装/" class="title">nodejs环境配置安装</a></p>
+                            <p class="item-date"><time datetime="2018-03-23T07:48:49.000Z" itemprop="datePublished">2018-03-23</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/03/21/JavaScript闭包/" class="thumbnail">
+                            <a href="/2018/03/21/hello-world/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -329,15 +378,15 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/03/21/JavaScript闭包/" class="title">JavaScript闭包</a></p>
-                            <p class="item-date"><time datetime="2018-03-21T13:08:13.000Z" itemprop="datePublished">2018-03-21</time></p>
+                            <p class="item-title"><a href="/2018/03/21/hello-world/" class="title">Hello World</a></p>
+                            <p class="item-date"><time datetime="2018-03-21T11:44:28.781Z" itemprop="datePublished">2018-03-21</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/03/21/JavaScript中函数参数传递/" class="thumbnail">
+                            <a href="/2018/03/21/从JavaScript的事件循环到Promise/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -349,15 +398,15 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/03/21/JavaScript中函数参数传递/" class="title">JavaScript中函数参数传递</a></p>
-                            <p class="item-date"><time datetime="2018-03-21T13:08:01.000Z" itemprop="datePublished">2018-03-21</time></p>
+                            <p class="item-title"><a href="/2018/03/21/从JavaScript的事件循环到Promise/" class="title">从JavaScript的事件循环到Promise</a></p>
+                            <p class="item-date"><time datetime="2018-03-21T11:40:08.000Z" itemprop="datePublished">2018-03-21</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/03/21/JavaScript中的事件委托机制/" class="thumbnail">
+                            <a href="/2018/02/23/ES6中的Generator函数/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -369,15 +418,15 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/03/21/JavaScript中的事件委托机制/" class="title">JavaScript中的事件委托机制</a></p>
-                            <p class="item-date"><time datetime="2018-03-21T13:07:39.000Z" itemprop="datePublished">2018-03-21</time></p>
+                            <p class="item-title"><a href="/2018/02/23/ES6中的Generator函数/" class="title">ES6中的Generator函数</a></p>
+                            <p class="item-date"><time datetime="2018-02-23T07:44:42.000Z" itemprop="datePublished">2018-02-23</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/03/21/JavaScript中的this指向问题/" class="thumbnail">
+                            <a href="/2016/09/02/nodejs基本语法/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -389,8 +438,8 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/03/21/JavaScript中的this指向问题/" class="title">JavaScript中的this指向问题</a></p>
-                            <p class="item-date"><time datetime="2018-03-21T13:07:09.000Z" itemprop="datePublished">2018-03-21</time></p>
+                            <p class="item-title"><a href="/2016/09/02/nodejs基本语法/" class="title">nodejs基本语法</a></p>
+                            <p class="item-date"><time datetime="2016-09-02T06:36:41.000Z" itemprop="datePublished">2016-09-02</time></p>
                         </div>
                     </li>
                 
@@ -406,7 +455,7 @@
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">2</span></li></ul>
         </div>
     </div>
 
@@ -416,7 +465,7 @@
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">-javascript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -426,7 +475,7 @@
     <div class="widget-wrap widget-float">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a>
+            <a href="/tags/javascript/" style="font-size: 15px;">-javascript</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nodejs/" style="font-size: 15px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/事件/" style="font-size: 10px;">事件</a> <a href="/tags/闭包/" style="font-size: 10px;">闭包</a>
         </div>
     </div>
 
